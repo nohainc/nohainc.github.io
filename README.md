@@ -1,155 +1,123 @@
-# Nano Markup
-Nano Markup is a minimalist markup language designed to prioritize simplicity, clarity, and efficiency. With a focus on core elements like key/value pairs and indentation, Nano Markup offers a straightforward syntax that makes document creation fast and intuitive. Ideal for scenarios where lightweight and human-readable formats are crucial, it provides an elegant way to structure data and information without unnecessary complexity. 
+---
+layout: default
+title: Nano Markup
+description: A minimal, indentation-based data format for strings, mappings, and sequences.
+permalink: /
+---
 
-## Language Overview
-In Nano Markup, the Key/Value pair forms the foundation of the language, serving as the primary building block for representing data. Documents are inherently structured as **List** by default, where all top-level elements are treated as entries in an implicit list.
+<section class="hero">
+  <p class="eyebrow">Nano Markup 1.0.0</p>
+  <h1>Structured data,<br><span>without the visual noise.</span></h1>
+  <p class="lede">Nano Markup is a minimal, indentation-based format for representing strings, mappings, and sequences in a form designed to be easy for people to read and write.</p>
+  <div class="actions">
+    <a class="button primary" href="https://nohainc.github.io/nanomarkup.github.com/specification.html">Read the specification</a>
+    <a class="button" href="https://github.com/nohainc/nanomarkup.spec/releases/tag/v1.0.0">Get Nano Markup 1.0.0</a>
+  </div>
+</section>
 
-Each document consists of one or more sections composed of keys, which act as unique identifiers, paired with their corresponding values. This design ensures clarity by defining relationships and properties in an unambiguous and consistent manner.
+<section class="comparison" aria-labelledby="example-heading">
+  <div class="section-heading">
+    <p class="eyebrow">One value, two syntaxes</p>
+    <h2 id="example-heading">Readable at a glance</h2>
+  </div>
+  <div class="code-grid">
+    <figure>
+      <figcaption>Nano Markup</figcaption>
+      <pre><code>..
+    name Ariana
+    languages:
+        Slovak
+        English
+    address|
+        20 Forest Street
+        811 01 Bratislava</code></pre>
+    </figure>
+    <figure>
+      <figcaption>JSON</figcaption>
+      <pre><code>{
+  "name": "Ariana",
+  "languages": [
+    "Slovak",
+    "English"
+  ],
+  "address": "20 Forest Street\n811 01 Bratislava"
+}</code></pre>
+    </figure>
+  </div>
+  <p class="example-link"><a href="https://github.com/nohainc/nanomarkup.spec/tree/v1.0.0/examples">Browse more paired Nano and JSON examples →</a></p>
+</section>
 
-#### Key Characteristics
-- Keys
-    - Unique within their scope
-    - Always appear on a new line
-    - Cannot include spaces or special characters
-- Values
-    - Single-line values: For concise data
-    - Multi-line values: For extended or descriptive content
-    - Empty values: For placeholders or default entries
-    - Lists: For collections of related items
-    - Sections: For grouping related key/value pairs under a common entity
-- Indentation
-    - Defines hierarchical relationships
-    - Organizes data into clear, logical structures
-    - Ensures documents are both human-readable and machine-parsable
+<section class="model" aria-labelledby="model-heading">
+  <div class="section-heading">
+    <p class="eyebrow">The complete data model</p>
+    <h2 id="model-heading">Exactly three value types</h2>
+  </div>
+  <div class="card-grid">
+    <article>
+      <span class="symbol">Aa</span>
+      <h3>String</h3>
+      <p>Unicode text, including empty and multiline text. Nano Markup does not infer numbers, booleans, nulls, or dates.</p>
+    </article>
+    <article>
+      <span class="symbol">..</span>
+      <h3>Mapping</h3>
+      <p>An unordered association of unique string keys to values. Mappings may contain strings, mappings, and sequences.</p>
+    </article>
+    <article>
+      <span class="symbol">:</span>
+      <h3>Sequence</h3>
+      <p>An ordered collection of values. Items may have different types, and duplicate items are preserved.</p>
+    </article>
+  </div>
+</section>
 
-## Sections
-Sections group related key/value pairs under a single entity. Each section is defined using double dot "..", followed by an indented block containing its key/value pairs. Indentation is vital for establishing hierarchy and readability.
-```
-Ariana..
-    birthday 7.8.2011
-    contacts..
-        email ariana@gmail.com
-        mobile 123456789
-```
-In this example, **Ariana** is a section containing a birthday key/value pair and a nested **contacts** section. Indentation determines the scope of key/value pairs and sections.
+<section class="syntax" aria-labelledby="syntax-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Syntax at a glance</p>
+    <h2 id="syntax-heading">A small language on purpose</h2>
+  </div>
+  <div class="syntax-table" role="table" aria-label="Nano Markup syntax summary">
+    <div role="row"><span role="cell">Root mapping</span><code>..</code></div>
+    <div role="row"><span role="cell">Root sequence</span><code>:</code></div>
+    <div role="row"><span role="cell">String entry</span><code>name Ariana</code></div>
+    <div role="row"><span role="cell">Nested mapping</span><code>contact..</code></div>
+    <div role="row"><span role="cell">Nested sequence</span><code>languages:</code></div>
+    <div role="row"><span role="cell">Multiline string</span><code>address|</code></div>
+    <div role="row"><span role="cell">Comment</span><code># comment</code></div>
+  </div>
+  <p>Each structural level uses exactly four ASCII spaces. A document can also contain a string directly at its root. The conventional file extension is <code>.nano</code>.</p>
+</section>
 
-#### Key Notes
-- ".." signals the start of a Section
-- All keys and values within a Section are indented with one tab
+<section class="ecosystem" aria-labelledby="ecosystem-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Start using it</p>
+    <h2 id="ecosystem-heading">Specification and implementations</h2>
+  </div>
+  <div class="link-grid">
+    <a href="https://github.com/nohainc/nanomarkup.spec/tree/v1.0.0">
+      <strong>Language specification</strong>
+      <span>Normative grammar, conformance fixtures, examples, and release history.</span>
+    </a>
+    <a href="https://github.com/nohainc/nanomarkup.python">
+      <strong>Python implementation</strong>
+      <span>Decode and encode Nano Markup using native Python values.</span>
+    </a>
+    <a href="https://github.com/nohainc/nanomarkup.go">
+      <strong>Go implementation</strong>
+      <span>Decode and encode with typed String, Mapping, and Sequence values.</span>
+    </a>
+  </div>
+</section>
 
-## Lists
-A document in Nano Markup is treated as a **List by default**, meaning all top-level elements are considered entries within an implicit list structure.
+<section class="release-callout" aria-labelledby="release-heading">
+  <div>
+    <p class="eyebrow">Stable release</p>
+    <h2 id="release-heading">Nano Markup 1.0.0</h2>
+    <p>The first stable language specification was published on July 23, 2026. Stable releases are immutable; any known errors are recorded separately as errata.</p>
+  </div>
+  <a class="button" href="https://github.com/nohainc/nanomarkup.spec/releases/tag/v1.0.0">Release notes and downloads</a>
+</section>
 
-Lists are explicitly defined with a colon ":" after the key. If the key is omitted, the list becomes **anonymous**. Items in the list appear on subsequent lines, each indented by one tab. Lists can also contain Sections, indicated by the double dot "..".
-```
-students:
-    ..
-        name James
-        age 20
-    ..
-        name John
-        age 21
+## About this repository
 
-:
-    Math
-    English
-    History
-```
-This design provides flexibility, allowing lists to contain both simple values and complex entities, all within a structured framework. The use of one-tab indentation for each list item, along with special handling for entities, ensures that data remains easy to read, organized, and adaptable to various needs.
-
-#### Key Notes
-- The entire document is implicitly a List at the top level
-- A colon ":" after the key indicates the start of the list
-- The key can be omitted for anonymous lists (lists without a key)
-- Each list item is indented by one tab
-- Sections within a List are preceded by the double dot ".." and indented with an additional tab
-
-## Values
-Values define the data associated with a key and come in two forms. A **single-line value** is data representation placed within the current line. A **multi-line value** is extended data spans multiple lines, with additional lines indented by one tab.
-```
-name Ariana
-age 12
-description This is a multi-line value.
-    You can add more than one line for data representation.
-```
-This method provides a clear, intuitive way to express complex or multi-line data, without requiring additional syntax. It maintains the hierarchical structure of the document, promoting readability and simplicity.
-
-#### Key Notes
-- A single-line value is written directly on the same line as the key
-- A multi-line value starts on the same line as the key and is continued on subsequent lines, each indented with an additional tab
-- Extra indentation for multi-line values ensures readability and consistency
-
-## Comments
-A comment is used to add notes, explanations, or annotations to the document. The comment must always begin on a new line. It cannot be placed alongside a value, key, or section. This ensures that comments remain separate from the actual data and do not interfere with the structure.
-
-A **single-line comment** starts with the "#" symbol and occupy a single line.
-A **multi-line comment** starts with the "#" and subsequent lines are indented with one extra tab to continue the comment.
-```
-# This is a single-line comment. It should start from a new line.
-
-# This is a multiline comment.
-    You can describe something here.
-    It spans multiple lines and provides detailed information.
-```
-
-#### Key Notes
-- Comments must begin on a new line
-- Comments cannot be placed alongside keys or values
-- Multi-line comments require additional indentation for continuation
-
-## Use Cases
-- Documentation and Notes: Nano Markup is perfect for creating structured, simple documents and notes. Its clear, minimal syntax makes it easy to write and update textual content without unnecessary complexity.
-- Log Files: Nano Markup is ideal for capturing structured log entries. The simplicity of its format makes it easy to parse log data, providing a human-readable way to store and retrieve log information.
-- Metadata Storage: For basic metadata management, Nano Markup offers an efficient way to define and store metadata (e.g., tags, descriptions, attributes) using key/value pairs and lists, without adding unnecessary overhead.
-- Configuration Files: With its straightforward syntax, Nano Markup is excellent for configuration files in applications, simplifying the process of defining and managing application settings in a readable format.
-- Data Exchange: Nano Markup provides an easy-to-understand format for data exchange between systems, offering a lightweight alternative to more complex data formats. 
-- Template Systems: Using Nano Markup for templates (e.g., emails, configuration files, or reports) is easy due to its simple, flexible structure, making it easy to define placeholders and reusable components.
-- RESTful APIs: For lightweight data payloads in RESTful APIs, Nano Markup serves as a simple alternative to JSON. Its compact and clear syntax makes it ideal for API communication.
-- Scripting and Automation: Nano Markup is useful for defining parameters and configurations in scripts and automation workflows. It offers a concise way to store task lists, state definitions, or automation configurations.
-- Knowledge Base: Organizing and structuring knowledge base content with Nano Markup is easy, as its simple format allows for fast updates and clear content management that is accessible to both technical and non-technical users.
-- Data Serialization: When serializing data in a human-readable format, Nano Markup provides a simple way to structure and transfer data between systems or applications. Its text-based format makes it easy to serialize and deserialize data without complex parsing.
-- Configuration Management: Nano Markup enhances configuration management systems by providing a simple and flexible format for defining and managing settings across environments and applications, reducing the overhead of complex configuration formats.
-- IoT Device Communication: In IoT applications, Nano Markup ensures efficient data exchange between devices with varying capabilities. Its simplicity is crucial for managing communication in connected ecosystems where devices may have limited resources.
-
-## Example
-```
-universities:
-    ..
-        name Harvard University
-        country USA
-        address Massachusetts Hall
-            Cambridge, MA 02138
-        students:
-            ..
-                name Mark
-                age 20
-                contacts
-                    email mark@gmail.com
-                    mobile 12345678
-            ..
-                name Mary
-                age 20
-                contacts 
-                    email mary@gmail.com
-                    mobile 678912345
-    ..
-        name University Of Oxford
-        country United Kingdom
-        address Wellington Square
-            Oxford
-            OX1 2JD
-            United Kingdom
-        students:
-            ..
-                name James
-                age 20
-                contacts
-                    email james@gmail.com
-                    mobile 123456789
-            ..
-                name John
-                age 21
-                contacts 
-                    email john@gmail.com
-                    mobile 345678912
-```
+This repository contains the official Nano Markup website. The normative language specification and conformance suite are maintained in the [Nano Markup specification repository](https://github.com/nohainc/nanomarkup.spec). Website corrections and improvements are welcome through pull requests.

@@ -1,52 +1,54 @@
 <!doctype html>
-<html lang="{{ site.lang | default: "en-US" }}">
+<html lang="{{ site.lang | default: 'en' }}">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="1s8_lB6hVVjf0acFB83gc5jua-KLyHFZhJv0ERTA4eA" />
-
-{% seo %}
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-    <script src="https://code.jquery.com/jquery-3.3.0.min.js" integrity="sha256-RTQy8VOmNlT6b2PIRur37p6JEBZUE7o8wPgMvu18MC4=" crossorigin="anonymous"></script>
-    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
-    <!--[if lt IE 9]>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-    {% include head-custom.html %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} — {% endif %}Nano Markup</title>
+    <meta name="description" content="{{ page.description | default: site.description | escape }}">
+    <meta name="google-site-verification" content="1s8_lB6hVVjf0acFB83gc5jua-KLyHFZhJv0ERTA4eA">
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% if page.title %}{{ page.title }} — {% endif %}Nano Markup">
+    <meta property="og:description" content="{{ page.description | default: site.description | escape }}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:site_name" content="Nano Markup">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" content="#17211b">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Nano Markup",
+      "url": "{{ '/' | absolute_url }}",
+      "description": {{ site.description | jsonify }},
+      "sameAs": [
+        "https://github.com/nohainc/nanomarkup.spec",
+        "https://github.com/nohainc/nanomarkup.python",
+        "https://github.com/nohainc/nanomarkup.go"
+      ]
+    }
+    </script>
   </head>
   <body>
-
-      <header>
-        <h1>{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
-        <p>{{ page.description | default: site.description | default: site.github.project_tagline }}</p>
-      </header>
-
-      <div id="banner">
-        <div class="downloads">
-          <span>GET STARTED WITH:</span>
-          <ul>
-            <li><a href="https://github.com/nanomarkup/nanomarkup.delphi" class="button" target="_blank">DELPHI</a></li>
-            <li><a href="https://github.com/nanomarkup/nanomarkup.go" class="button" target="_blank">GO</a></li>
-          </ul>
-        </div>
-      </div><!-- end banner -->
-
-    <div class="wrapper">
-      <nav>
-        <ul></ul>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="{{ '/' | relative_url }}" aria-label="Nano Markup home">
+        <span class="brand-mark" aria-hidden="true">N</span>
+        <span>Nano Markup</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="{{ '/specification.html' | relative_url }}">Specification</a>
+        <a href="https://github.com/nohainc/nanomarkup.spec/tree/v1.0.0/examples">Examples</a>
+        <a href="https://github.com/nohainc/nanomarkup.spec">GitHub</a>
       </nav>
-      <section>
-        {{ content }}
-
-      </section>
-      <footer>
-        {% if site.github.is_project_page %}
-          <p>Project maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
-        {% endif %}
-        <p><small>© <span id="cdate"></span><script>document.getElementById("cdate").innerHTML = (new Date().getFullYear());</script> <a href="mailto:vitalii.noga@gmail.com">vitalii.noga@gmail.com</a></small></p>
-      </footer>
-    </div>
+    </header>
+    <main id="main-content">
+      {{ content }}
+    </main>
+    <footer class="site-footer">
+      <p><strong>Nano Markup</strong> <span>Version {{ site.version }}</span></p>
+      <p><a href="https://github.com/nohainc/nanomarkup.spec/blob/v1.0.0/LICENSE">CC BY 4.0</a> · <a href="https://github.com/nohainc/nanomarkup.spec/blob/v1.0.0/ERRATA.md">Errata</a> · <a href="https://github.com/nohainc/nanomarkup.spec/blob/v1.0.0/SECURITY.md">Security</a></p>
+    </footer>
   </body>
 </html>
