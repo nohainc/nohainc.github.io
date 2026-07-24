@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Nano Markup tools/render_spec.py">
+  <meta name="source-sha256" content="d98aafcc349d891bbb59d823f184f0a132f2dc9473f41e3ea2bf62ca5d3f159a">
+  <title>Nano Markup 1.0.0</title>
+  <meta name="description" content="The Nano Markup 1.0.0 language specification: syntax, data model, parsing rules, errors, and conformance requirements.">
+  <meta name="google-site-verification" content="1s8_lB6hVVjf0acFB83gc5jua-KLyHFZhJv0ERTA4eA">
+  <link rel="canonical" href="https://nohainc.github.io/nanomarkup.github.com/specification.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Nano Markup 1.0.0 Language Specification">
+  <meta property="og:description" content="The stable Nano Markup language specification: syntax, data model, parsing rules, errors, and conformance requirements.">
+  <meta property="og:url" content="https://nohainc.github.io/nanomarkup.github.com/specification.html">
+  <meta name="twitter:card" content="summary">
+  <style>
+    :root { color-scheme: light dark; --paper: #ffffff; --ink: #17202a;
+      --muted: #586174; --line: #d8dee8; --accent: #3157a4;
+      --code: #f4f6f9; --notice: #eef4ff; }
+    @media (prefers-color-scheme: dark) { :root { --paper: #12161d;
+      --ink: #e7ebf2; --muted: #aab3c2; --line: #343c49;
+      --accent: #8eb4ff; --code: #1b212b; --notice: #18243a; } }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink);
+      font: 16px/1.62 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif; }
+    .layout { display: grid; grid-template-columns: minmax(14rem, 18rem) minmax(0, 1fr);
+      gap: 3rem; max-width: 78rem; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+    nav { position: sticky; top: 1rem; align-self: start; max-height: calc(100vh - 2rem);
+      overflow: auto; font-size: .88rem; }
+    nav strong { display: block; margin-bottom: .6rem; }
+    nav ol { list-style: none; margin: 0; padding: 0; }
+    nav li { margin: .18rem 0; } nav .level-3 { margin-left: .75rem; }
+    main { min-width: 0; }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; margin-top: 0;
+      overflow-wrap: anywhere; }
+    h2 { margin-top: 3.2rem; padding-bottom: .35rem; border-bottom: 1px solid var(--line); }
+    h3 { margin-top: 2.2rem; }
+    a { color: var(--accent); }
+    table { display: block; max-width: 100%; overflow-x: auto;
+      border-collapse: collapse; margin: 1.25rem 0; }
+    th, td { border: 1px solid var(--line); padding: .55rem .7rem; text-align: left; }
+    pre { overflow-x: auto; background: var(--code); border: 1px solid var(--line);
+      border-radius: .45rem; padding: 1rem; line-height: 1.45; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .92em; }
+    :not(pre) > code { background: var(--code); border-radius: .25rem; padding: .1em .3em; }
+    blockquote { border-left: .25rem solid var(--line); margin-left: 0; padding-left: 1rem;
+      color: var(--muted); }
+    .notice { background: var(--notice); border: 1px solid var(--line);
+      border-radius: .5rem; padding: .85rem 1rem; margin: 0 0 2rem;
+      overflow-wrap: anywhere; }
+    footer { border-top: 1px solid var(--line); color: var(--muted); margin-top: 4rem;
+      padding-top: 1rem; font-size: .85rem; overflow-wrap: anywhere; }
+    @media (max-width: 800px) {
+      .layout { display: block; padding: 1.5rem 1rem 4rem; }
+      nav { position: static; max-height: none; margin-bottom: 2rem; }
+      nav .level-3 { display: none; }
+    }
+    @media print {
+      nav { display: none; }
+      .layout { display: block; max-width: none; padding: 0; }
+      body { color: #000; background: #fff; }
+      a { color: inherit; }
+      pre { white-space: pre-wrap; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <nav aria-label="Specification sections">
+      <strong>Contents</strong>
+      <ol><li class="level-2"><a href="#1-status-and-conformance">1. Status and conformance</a></li><li class="level-2"><a href="#2-data-model">2. Data model</a></li><li class="level-2"><a href="#3-source-text">3. Source text</a></li><li class="level-2"><a href="#4-indentation">4. Indentation</a></li><li class="level-2"><a href="#5-keys">5. Keys</a></li><li class="level-2"><a href="#6-documents">6. Documents</a></li><li class="level-2"><a href="#7-mappings-and-sequences">7. Mappings and sequences</a></li><li class="level-3"><a href="#7-1-mapping-entries">7.1 Mapping entries</a></li><li class="level-3"><a href="#7-2-sequence-items">7.2 Sequence items</a></li><li class="level-2"><a href="#8-strings">8. Strings</a></li><li class="level-3"><a href="#8-1-raw-strings">8.1 Raw strings</a></li><li class="level-3"><a href="#8-2-quoted-strings">8.2 Quoted strings</a></li><li class="level-3"><a href="#8-3-multiline-strings">8.3 Multiline strings</a></li><li class="level-2"><a href="#9-comments">9. Comments</a></li><li class="level-3"><a href="#9-1-data-serialization-example">9.1 Data serialization example</a></li><li class="level-2"><a href="#10-normative-parsing-algorithm">10. Normative parsing algorithm</a></li><li class="level-3"><a href="#10-1-prepare-physical-lines">10.1 Prepare physical lines</a></li><li class="level-3"><a href="#10-2-classify-the-root">10.2 Classify the root</a></li><li class="level-3"><a href="#10-3-parse-indentation-and-containers">10.3 Parse indentation and containers</a></li><li class="level-3"><a href="#10-4-recognize-syntax-lines">10.4 Recognize syntax lines</a></li><li class="level-3"><a href="#10-5-collect-multiline-strings">10.5 Collect multiline strings</a></li><li class="level-3"><a href="#10-6-produce-the-data-tree">10.6 Produce the data tree</a></li><li class="level-2"><a href="#11-errors">11. Errors</a></li><li class="level-2"><a href="#12-json-representation-used-by-tests">12. JSON representation used by tests</a></li><li class="level-2"><a href="#13-example">13. Example</a></li><li class="level-2"><a href="#14-deferred-features">14. Deferred features</a></li><li class="level-2"><a href="#15-security-and-resource-limits">15. Security and resource limits</a></li><li class="level-2"><a href="#16-normative-references">16. Normative references</a></li></ol>
+    </nav>
+    <main>
+      <aside class="notice"><strong>Informative HTML rendering.</strong>
+        <a href="https://github.com/nohainc/nanomarkup.spec/blob/v1.0.0/SPEC.md">SPEC.md at the immutable v1.0.0 tag</a>
+        is the normative specification. <a href="./">Return to the Nano Markup website.</a></aside>
+      <h1 id="nano-markup-1-0-0">Nano Markup 1.0.0</h1>
+<h2 id="1-status-and-conformance">1. Status and conformance</h2>
+<p>This document is the normative language specification for Nano Markup
+1.0.0. The key words <strong>MUST</strong>, <strong>MUST NOT</strong>, <strong>SHOULD</strong>, <strong>SHOULD NOT</strong>, and
+<strong>MAY</strong> are to be interpreted as described in BCP 14, RFC 2119 and RFC 8174,
+when, and only when, they appear in all capitals.</p>
+<p>One released specification version consists of the files at one immutable Git
+tag. <code>SPEC.md</code>, <code>tests/manifest.json</code>, <code>tests/writer/manifest.json</code>, and every
+fixture referenced by those manifests are normative. <code>CONFORMANCE.md</code> defines
+the normative adapter protocol used to present conformance results, but JSON
+transport in that protocol is not Nano Markup syntax. <code>grammar.ebnf</code>, examples,
+coverage indexes, <code>SPEC.html</code>, and explanatory repository documents are
+informative. If an informative file conflicts with normative material, the
+normative material controls.</p>
+<p>Code examples and explanatory notes inside this document illustrate the
+normative rules. If an example conflicts with a normative requirement, the
+normative requirement controls.</p>
+<p>A conforming data decoder MUST implement this specification, accept every
+valid conformance fixture, produce the specified data tree, and reject every
+invalid fixture with the specified error category. Exact diagnostic wording is
+implementation-defined.</p>
+<p>A conforming data writer MUST accept a Nano Markup document tree and emit a
+Nano Markup document that a conforming decoder reads as a data tree equivalent
+to the writer's input. A data writer is not required to reproduce comments,
+whitespace, quote choice, line endings, or mapping source order because those
+properties are not part of the data model.
+A writer given a value outside the Nano Markup data model MUST report an error
+rather than silently alter or omit that value.</p>
+<p>Conformance is claimed separately for the <strong>decoder</strong> and <strong>writer</strong> profiles.
+An implementation may claim either profile or both, but a claim MUST identify
+the exact specification version and every claimed profile. For example:
+<code>Nano Markup 1.0.0 decoder and writer</code>. Partial support within a claimed
+profile is not conforming. Passing the shared fixtures is required but does not
+replace compliance with normative behavior for inputs not enumerated by the
+finite corpus.</p>
+<p>An implementation MAY additionally provide a source-preserving document API.
+Such an API is outside data conformance and must keep presentation metadata
+separate from mapping keys, sequence items, and strings.</p>
+<p>The JSON protocol in <code>CONFORMANCE.md</code> is conformance test infrastructure, not a
+Nano Markup serialization format and not part of the language data model.</p>
+<h2 id="2-data-model">2. Data model</h2>
+<p>A Nano Markup value is exactly one of:</p>
+<ul>
+<li><strong>String</strong>: a sequence of Unicode scalar values excluding U+0000 through
+U+0008, U+000B through U+000C, U+000E through U+001F, and U+007F through
+U+009F. TAB, LF, and CR are permitted string values.</li>
+<li><strong>Mapping</strong>: an unordered association of unique Nano Markup keys to values.</li>
+<li><strong>Sequence</strong>: an ordered collection of values. Values in one sequence MAY
+have different types.</li>
+</ul>
+<p>A Nano Markup document tree is a finite, acyclic tree of Nano Markup values.
+Its root MAY therefore be a String, Mapping, or Sequence. Reusing the same
+host-language container in multiple positions is permitted when it does not
+form a cycle; Nano Markup defines values, not object identity or references.</p>
+<p>For this specification, a Unicode scalar value is an integer from U+0000
+through U+10FFFF other than the surrogate range U+D800 through U+DFFF.
+Assigned characters, unassigned scalar values, private-use characters, and
+noncharacters are treated alike unless excluded explicitly above. Nano Markup
+does not depend on Unicode normalization, character properties, or the set of
+characters assigned by a particular Unicode version.</p>
+<p>String and key comparison is code-point exact and performs no Unicode
+normalization or case folding. Two mappings are equivalent when they contain
+the same keys associated with equivalent values, regardless of source order.
+Two sequences are equivalent when they have the same number of positionally
+equivalent items. Duplicate sequence items are significant and permitted.</p>
+<p>Comments, whitespace, quote choice, line endings, and mapping source order are
+presentation metadata and are not part of the data model. A data decoder MAY
+discard them. Inserting or removing a comment outside a multiline string MUST
+NOT change the decoded data tree.</p>
+<p>Consequently, data round-tripping and source round-tripping are different:</p>
+<ul>
+<li><code>decode(encode(tree))</code> MUST produce a data tree equivalent to <code>tree</code> for
+every Nano Markup value accepted by the writer.</li>
+<li><code>encode(decode(document))</code> is not required to reproduce the original source.</li>
+</ul>
+<p>Nano Markup does not infer nulls, booleans, numbers, dates, or any other scalar
+types. Applications MAY interpret strings using rules outside this
+specification.</p>
+<p>For example, every leaf below is a String, including <code>true</code> and <code>12</code>:</p>
+<pre><code class="language-nano">..
+    enabled true
+    age 12
+    labels:
+        student
+        cyclist
+</code></pre>
+<h2 id="3-source-text">3. Source text</h2>
+<p>The conventional file extension for a Nano Markup source document is <code>.nano</code>.</p>
+<p>A document MUST be UTF-8 without a leading byte-order mark (the UTF-8 signature
+bytes EF BB BF). U+FEFF appearing after the first source byte is ordinary
+string data. Invalid UTF-8 and literal
+U+0000 through U+0008, U+000B through U+000C, U+000E through U+001F, or U+007F
+through U+009F are errors. Literal TAB is handled separately below. Literal CR
+and LF are permitted only as physical line endings as defined below.</p>
+<p>LF and CRLF are both valid physical line endings and MAY be mixed in one
+document. Every CRLF pair is normalized to LF before structural parsing. A CR
+not immediately followed by LF is invalid. A final LF or CRLF terminates the
+last physical line but does not create an additional blank line or data value.</p>
+<p>A conforming writer MUST use either LF or CRLF for every line ending in one
+emitted document and SHOULD use LF unless its caller requests CRLF. The selected
+source line ending is presentation metadata. Normal data decoding does not
+preserve it; a source-preserving document API MAY do so.</p>
+<p>A literal tab is forbidden everywhere, including indentation and scalar text.
+The two-character escape <code>\t</code> represents a tab in a quoted string.</p>
+<p>A blank line contains zero or more ASCII spaces and no other characters. Blank
+lines are ignored except while collecting a multiline block as described in
+section 8. Other Unicode whitespace characters permitted by the data model are
+string data, not blank-line syntax.</p>
+<h2 id="4-indentation">4. Indentation</h2>
+<p>Indentation expresses containment. One indentation level is exactly four ASCII
+spaces. Every nonblank syntax or comment line MUST begin with a number of
+spaces divisible by four. Tabs, partial levels, skipped levels, and syntax
+indentation without a parent container or multiline block are errors. A
+comment line need not correspond to an open container, because its indentation
+is presentation metadata, but its indentation is validated before the comment
+is ignored.</p>
+<p>After the required structural prefix has been removed, a nonblank multiline
+content line MAY begin with any number of additional ASCII spaces. Those spaces
+are string data and do not have to form complete indentation levels. A physical
+line containing only ASCII spaces remains a blank line regardless of its width;
+a writer MUST use quoted syntax when a string contains a logical line made only
+of spaces.</p>
+<p>A child is indented exactly one level more than its parent header. A dedent ends
+the current container and returns to the matching earlier level.</p>
+<p>Here <code>child</code> is eight spaces from the left margin because it is inside
+<code>parent</code>; the dedented <code>sibling</code> returns to the root mapping:</p>
+<pre><code class="language-nano">..
+    parent..
+        child value
+    sibling value
+</code></pre>
+<h2 id="5-keys">5. Keys</h2>
+<p>A key matches this grammar:</p>
+<pre><code class="language-text">[A-Za-z_][A-Za-z0-9_-]*
+</code></pre>
+<p>Keys are case-sensitive. Two equal keys MUST NOT occur in the same mapping.
+The same key MAY occur in different mappings.</p>
+<p>For example, <code>user_name</code>, <code>release-1</code>, and <code>Case</code> are valid and distinct keys.
+<code>1user</code> and <code>full name</code> are not valid keys.</p>
+<h2 id="6-documents">6. Documents</h2>
+<p>An empty document represents an empty mapping.</p>
+<p>After blank and comment lines are ignored, a document root has exactly one of
+these forms at indentation level zero:</p>
+<pre><code class="language-text">..             mapping; entries are children at level one
+:              sequence; items are children at level one
+raw string     one-line string
+&quot;quoted&quot;       one-line quoted string
+|              multiline string; content begins at level one
+</code></pre>
+<p>The root value is the document's only top-level data entry. Blank lines and
+comments MAY appear before or after it. Any additional top-level data line is
+<code>E_SYNTAX</code>.</p>
+<p>An empty, ASCII-space-only, or comment-only document represents an empty
+mapping. Consequently, an empty root string MUST be written as <code>&quot;&quot;</code>. The exact
+root strings <code>..</code>, <code>:</code>, and <code>|</code>, and a root string beginning with <code>#</code>, MUST be
+quoted because their unquoted forms are structural syntax or a comment.</p>
+<p>The root markers follow the anonymous container and multiline markers already
+used in sequences. A root mapping or sequence with no child data lines is
+empty. Comments do not make it nonempty.</p>
+<p>These are three complete documents with different root types:</p>
+<pre><code class="language-nano">Hello from a String root
+</code></pre>
+<pre><code class="language-nano">:
+    red
+    green
+</code></pre>
+<pre><code class="language-nano">..
+    name Ariana
+</code></pre>
+<p>Only the exact tokens <code>..</code>, <code>:</code>, and <code>|</code> are recognized as root markers. For
+example, <code>colors:</code> and <code>name Ariana</code> at level zero are raw root strings, not
+mapping entries. A mapping containing a named sequence is written explicitly:</p>
+<pre><code class="language-text">..
+    colors:
+        red
+        green
+</code></pre>
+<h2 id="7-mappings-and-sequences">7. Mappings and sequences</h2>
+<h3 id="7-1-mapping-entries">7.1 Mapping entries</h3>
+<p>Within a mapping, one data line has one of these forms:</p>
+<pre><code class="language-text">key value    raw or quoted string
+key          empty string
+key|         multiline string
+key..        nested mapping
+key:         nested sequence
+</code></pre>
+<p>The separator between a key and a scalar is exactly one ASCII space.
+<code>key|</code>, like <code>key..</code> and <code>key:</code>, has no separator before its structural marker.
+Additional leading or trailing spaces in an unquoted value are errors and must
+instead be represented with a quoted string.</p>
+<p><code>key..</code> and <code>key:</code> contain all immediately following lines indented exactly one
+level deeper. With no such data lines they represent empty containers.</p>
+<h3 id="7-2-sequence-items">7.2 Sequence items</h3>
+<p>Every sequence item begins exactly one level deeper than its sequence header.
+An item has one of these forms after indentation is removed:</p>
+<pre><code class="language-text">value    raw or quoted string
+|        multiline string
+..       nested mapping
+:        nested sequence
+</code></pre>
+<p>An empty string item MUST be written as <code>&quot;&quot;</code>. The exact raw strings <code>..</code>, <code>:</code>,
+and <code>|</code> MUST be quoted because their unquoted forms are structural markers.
+Anonymous mapping and sequence items contain their immediately following lines
+indented exactly one further level. With no such data lines they are empty.</p>
+<p>Attached markers create structures, while the same markers after one separator
+space are ordinary string values:</p>
+<pre><code class="language-nano">..
+    child..
+    items:
+    description|
+        Multiple lines
+        of text
+    mapping_text ..
+    sequence_text :
+    pipe_text |
+</code></pre>
+<h2 id="8-strings">8. Strings</h2>
+<h3 id="8-1-raw-strings">8.1 Raw strings</h3>
+<p>A raw string is nonempty text on one physical line. It MUST NOT begin or end
+with an ASCII space, begin with <code>&quot;</code>, contain a literal TAB, CR, or LF, or
+contain a Unicode scalar value excluded by section 2. A sequence raw string
+also cannot begin with <code>#</code>, because that spelling starts a comment. All other
+Unicode scalar values are preserved exactly.</p>
+<p>On a sequence line, the exact tokens <code>..</code>, <code>:</code>, and <code>|</code> are not raw strings.
+On a mapping line, structural markers are recognized only in the complete forms
+defined in section 7.1.</p>
+<p>The spellings that require quoting in a scalar position are summarized here:</p>
+<table>
+<thead>
+<tr>
+<th>Scalar value</th>
+<th>Document root</th>
+<th>Mapping value</th>
+<th>Sequence item</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>empty string</td>
+<td><code>&quot;&quot;</code></td>
+<td>bare key or <code>&quot;&quot;</code></td>
+<td><code>&quot;&quot;</code></td>
+</tr>
+<tr>
+<td><code>|</code></td>
+<td><code>&quot;|&quot;</code></td>
+<td><code>|</code> or <code>&quot;|&quot;</code></td>
+<td><code>&quot;|&quot;</code></td>
+</tr>
+<tr>
+<td><code>..</code></td>
+<td><code>&quot;..&quot;</code></td>
+<td><code>..</code> or <code>&quot;..&quot;</code></td>
+<td><code>&quot;..&quot;</code></td>
+</tr>
+<tr>
+<td><code>:</code></td>
+<td><code>&quot;:&quot;</code></td>
+<td><code>:</code> or <code>&quot;:&quot;</code></td>
+<td><code>&quot;:&quot;</code></td>
+</tr>
+<tr>
+<td>begins with <code>#</code></td>
+<td>quoted</td>
+<td>raw or quoted</td>
+<td>quoted</td>
+</tr>
+</tbody>
+</table>
+<p>In the mapping column, <code>..</code> and <code>:</code> are values following the required key and
+separator; for example, <code>marker ..</code>. The forms <code>key..</code>, <code>key:</code>, and <code>key|</code>
+remain structural syntax. At the document root, <code>..</code>, <code>:</code>, and <code>|</code> are also
+structural and MUST be quoted when intended as strings.</p>
+<p>Raw mapping values may contain spaces and <code>#</code>; there is no inline-comment
+syntax:</p>
+<pre><code class="language-nano">..
+    title Nano Markup language
+    note # this complete remainder is string data
+</code></pre>
+<h3 id="8-2-quoted-strings">8.2 Quoted strings</h3>
+<p>A quoted string begins and ends with <code>&quot;</code> and MUST occupy the complete scalar
+position. It supports exactly these escapes:</p>
+<table>
+<thead>
+<tr>
+<th>Escape</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\&quot;</code></td>
+<td>quotation mark</td>
+</tr>
+<tr>
+<td><code>\\</code></td>
+<td>reverse solidus</td>
+</tr>
+<tr>
+<td><code>\n</code></td>
+<td>line feed</td>
+</tr>
+<tr>
+<td><code>\r</code></td>
+<td>carriage return</td>
+</tr>
+<tr>
+<td><code>\t</code></td>
+<td>tab</td>
+</tr>
+</tbody>
+</table>
+<p>Other escapes, missing closing quotes, trailing text after the closing quote,
+unescaped TAB, CR, or LF, and Unicode scalar values excluded by section 2 are
+errors. Unicode text is written directly as UTF-8; <code>\u</code> escapes are not part of
+Nano Markup 1.0.</p>
+<p>Quoted strings represent otherwise ambiguous whitespace and escaped control
+characters:</p>
+<pre><code class="language-nano">..
+    padded &quot;  spaces are preserved  &quot;
+    lines &quot;first\nsecond&quot;
+    tab &quot;left\tright&quot;
+</code></pre>
+<h3 id="8-3-multiline-strings">8.3 Multiline strings</h3>
+<p>A multiline string begins with <code>key|</code> in a mapping or <code>|</code> at the document root
+or in a sequence. Its content is collected before the following physical lines
+are interpreted as comments or structural syntax. A nonblank content line must
+begin with at least one indentation level more than the block header. Exactly
+that required prefix is removed; every additional character, including spaces
+and <code>#</code>, is preserved.</p>
+<p>Blank physical lines encountered while collecting a block become empty content
+lines. Their behavior is:</p>
+<ul>
+<li>leading blank lines before the first nonblank content line are preserved;</li>
+<li>blank lines between nonblank content lines are preserved;</li>
+<li>blank lines after the last nonblank content line are discarded;</li>
+<li>a block with no nonblank content is the empty string.</li>
+</ul>
+<p>Remaining content lines are joined with LF regardless of whether their source
+lines used LF or CRLF. No terminal LF is added automatically. To represent a
+string that deliberately ends with LF, use a quoted <code>\n</code> escape.</p>
+<p>Within a multiline block, mapping, sequence, quote, escape, and comment syntax
+has no special meaning. A nonblank line with less than the required content
+prefix ends the block and is parsed normally. If that line's indentation is not
+valid in the surrounding structure, parsing subsequently produces <code>E_INDENT</code>.</p>
+<p>For example, this value decodes to
+<code>&quot;20 Forest Street\n811 01 Bratislava&quot;</code> without an implicit final LF:</p>
+<pre><code class="language-nano">..
+    address|
+        20 Forest Street
+        811 01 Bratislava
+</code></pre>
+<h2 id="9-comments">9. Comments</h2>
+<p>Outside multiline blocks, a line whose first non-indentation character is <code>#</code>
+is a comment. A data decoder MUST ignore the entire line, including its line
+ending. Inline comments are not supported. A <code>#</code> elsewhere in a raw or quoted
+scalar is data.</p>
+<p>Source encoding, forbidden-character, tab, and indentation validation occurs
+before a comment line is ignored. A comment cannot hide an otherwise invalid
+byte, character, tab, or partial indentation level.</p>
+<p>Comment indentation MUST use complete four-space levels, but comments do not
+open containers, close containers, satisfy a container's need for a child,
+participate in duplicate-key detection, or add any value to the data tree.
+Comments MAY occur before or after the root and between any two syntax lines.</p>
+<p>A writer serializing only a data tree SHOULD emit no comments because the tree
+contains no comment information. An implementation MAY accept comment metadata
+through a separate document API, but that API is not part of Nano Markup data
+conformance. A tool claiming source-preserving behavior must retain comments
+outside its data tree and restore their relative placement.</p>
+<p>Removing every comment line from a valid document MUST leave a document with
+the same decoded data tree. This rule does not apply to lines beginning with
+<code>#</code> inside multiline strings, where the character is data.</p>
+<h3 id="9-1-data-serialization-example">9.1 Data serialization example</h3>
+<p>Given this source document:</p>
+<pre><code class="language-text"># User profile
+..
+    name Ariana
+    age 12
+</code></pre>
+<p>a data decoder produces a mapping equivalent to:</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Ariana&quot;,
+  &quot;age&quot;: &quot;12&quot;
+}
+</code></pre>
+<p>A data writer may later emit only:</p>
+<pre><code class="language-text">..
+    name Ariana
+    age 12
+</code></pre>
+<p>Losing the comment in this operation is expected presentation loss, not data
+loss. A source-preserving editor must use a separate document representation.</p>
+<h2 id="10-normative-parsing-algorithm">10. Normative parsing algorithm</h2>
+<p>A conforming decoder MUST behave as if it performs the following steps. It may
+use any internal architecture that produces the same result.</p>
+<h3 id="10-1-prepare-physical-lines">10.1 Prepare physical lines</h3>
+<ol>
+<li>Decode the input as UTF-8 and reject a leading UTF-8 signature, invalid byte
+sequence, U+0000 through U+0008, U+000B through U+000C, U+000E through
+U+001F, or U+007F through U+009F with <code>E_ENCODING</code>.</li>
+<li>Reject a literal tab anywhere with <code>E_TAB</code>.</li>
+<li>Convert every CRLF pair to LF. LF and CRLF may be mixed. A CR not followed
+by LF is <code>E_ENCODING</code>.</li>
+<li>Split the source into physical lines. A final LF terminates the last line but
+does not create an additional blank line.</li>
+</ol>
+<h3 id="10-2-classify-the-root">10.2 Classify the root</h3>
+<ol>
+<li>Validate indentation on comment lines, then ignore blank and comment lines
+while looking for the first data line.</li>
+<li>If there is no data line, return an empty mapping.</li>
+<li>Require the first data line to have indentation level zero.</li>
+<li>If it is exactly <code>..</code>, create a root mapping and parse its children at level
+one.</li>
+<li>If it is exactly <code>:</code>, create a root sequence and parse its children at level
+one.</li>
+<li>If it is exactly <code>|</code>, collect a root multiline string using section 10.5.</li>
+<li>Otherwise, parse the complete line as one raw or quoted root string.</li>
+<li>After the root has ended, ignore validated blank and comment lines. A
+remaining indented data line is <code>E_INDENT</code>; any remaining level-zero data
+line is <code>E_SYNTAX</code>.</li>
+</ol>
+<h3 id="10-3-parse-indentation-and-containers">10.3 Parse indentation and containers</h3>
+<p>For syntax and comment lines, count leading ASCII spaces and require the count
+to be divisible by four. The quotient is the indentation level. Blank lines do
+not change the current level.</p>
+<p>When parsing a mapping or sequence at level <code>n</code>:</p>
+<ol>
+<li>After validating their indentation, ignore blank and comment lines, except
+that multiline collection follows section 10.5.</li>
+<li>A data line below level <code>n</code> ends the current container.</li>
+<li>A data line above level <code>n</code> without a preceding container or multiline
+header at level <code>n</code> is <code>E_INDENT</code>.</li>
+<li>A child of a container header at level <code>n</code> must be at level <code>n + 1</code>.
+Encountering a deeper level is <code>E_INDENT</code>; encountering the same or a lower
+level means the container is empty.</li>
+<li>Mapping keys are compared exactly as written. A repeated key in the current
+mapping is <code>E_DUPLICATE_KEY</code>.</li>
+</ol>
+<p>Blank and comment lines between a container header and the next data line do
+not make the container nonempty. The next data line determines whether a child
+exists.</p>
+<h3 id="10-4-recognize-syntax-lines">10.4 Recognize syntax lines</h3>
+<p>In a mapping, after indentation is removed, classify a line deterministically
+in this order:</p>
+<ol>
+<li>If the line contains no ASCII space and ends with <code>..</code>, remove that suffix
+and treat the remainder as the candidate key for a nested mapping.</li>
+<li>Otherwise, if the line contains no ASCII space and ends with <code>:</code>, remove
+that suffix and treat the remainder as the candidate key for a nested
+sequence.</li>
+<li>Otherwise, if the line contains no ASCII space and ends with <code>|</code>, remove
+that suffix and treat the remainder as the candidate key for a multiline
+string.</li>
+<li>Otherwise, if the line contains no ASCII space, treat the complete line as
+the candidate key for an empty string.</li>
+<li>Otherwise, split at the first ASCII space. The prefix is the candidate key
+and the complete remainder is a raw or quoted scalar candidate.</li>
+</ol>
+<p>After classification, validate the candidate key before validating its value.
+Thus <code>name|</code> is a multiline header, <code>name |</code> is the scalar value <code>|</code>, and
+<code>name value |</code> is the scalar value <code>value |</code>. The line <code>name  |</code> is a scalar
+candidate whose value begins with an ASCII space and is <code>E_STRING</code>; <code>name </code> is
+a scalar candidate with an empty scalar and is also <code>E_STRING</code>.</p>
+<p>In a sequence, recognize a line in this order:</p>
+<ol>
+<li>Exact <code>..</code>: mapping item.</li>
+<li>Exact <code>:</code>: sequence item.</li>
+<li>Exact <code>|</code>: multiline string item.</li>
+<li>A raw or quoted scalar item.</li>
+</ol>
+<p>The key and scalar must satisfy sections 5 and 8. Text that matches none of the
+forms is an error from the most specific applicable category in section 11.</p>
+<h3 id="10-5-collect-multiline-strings">10.5 Collect multiline strings</h3>
+<p>For a multiline header at level <code>n</code>, the required content prefix is exactly
+<code>4 × (n + 1)</code> ASCII spaces.</p>
+<ol>
+<li>Visit subsequent physical lines without first classifying comments.</li>
+<li>Accumulate blank lines provisionally.</li>
+<li>If a nonblank line begins with the required prefix, remove exactly that
+prefix, append any provisional blank lines, and append the remaining text.</li>
+<li>If a nonblank line does not begin with the required prefix, discard
+provisional trailing blank lines and end the block before that line.</li>
+<li>At end-of-file, discard provisional trailing blank lines.</li>
+<li>Join collected lines with LF and do not append an implicit terminal LF.</li>
+</ol>
+<p>After collection ends, resume structural parsing at the first unconsumed line.</p>
+<h3 id="10-6-produce-the-data-tree">10.6 Produce the data tree</h3>
+<p>Decode quoted escapes only after a scalar has been classified as quoted. Keep
+raw and multiline content exactly as defined in section 8. Comments and other
+presentation metadata are not inserted into the result.</p>
+<h2 id="11-errors">11. Errors</h2>
+<p>Conformance fixtures use these stable error categories:</p>
+<ul>
+<li><code>E_ENCODING</code>: invalid UTF-8, a leading UTF-8 signature, a bare CR, or a forbidden
+control character.</li>
+<li><code>E_TAB</code>: a literal tab anywhere in the source.</li>
+<li><code>E_INDENT</code>: partial, skipped, mixed, or unexpected indentation.</li>
+<li><code>E_KEY</code>: a key does not match the required grammar.</li>
+<li><code>E_DUPLICATE_KEY</code>: a mapping contains a duplicate key.</li>
+<li><code>E_ESCAPE</code>: an invalid quoted-string escape.</li>
+<li><code>E_STRING</code>: malformed quoted or raw string syntax.</li>
+<li><code>E_SYNTAX</code>: any other structurally invalid document.</li>
+</ul>
+<p>When more than one error exists, a conforming decoder MUST report the category
+with the highest priority in this order:</p>
+<ol>
+<li><code>E_ENCODING</code></li>
+<li><code>E_TAB</code></li>
+<li><code>E_INDENT</code></li>
+<li><code>E_SYNTAX</code></li>
+<li><code>E_KEY</code></li>
+<li><code>E_DUPLICATE_KEY</code></li>
+<li><code>E_ESCAPE</code></li>
+<li><code>E_STRING</code></li>
+</ol>
+<p>Within one category, the error whose offending source byte occurs first MUST be
+reported. For an error detected at end-of-input, the position immediately after
+the final byte is its source position. This ordering makes conformance
+deterministic; implementations may still provide additional diagnostics outside
+the conformance result.</p>
+<p>This rule selects which error is reported; it does not require a public API to
+expose the byte offset. Adapter protocol version 1 transports only the selected
+category, so earliest-position behavior is verified by implementation-native
+tests and review. A future protocol version may add a position field, but doing
+so must follow the protocol compatibility rules in <code>VERSIONING.md</code>.</p>
+<p>For example, this partial indentation is <code>E_INDENT</code>:</p>
+<pre><code class="language-nano-invalid">..
+   name Ariana
+</code></pre>
+<p>This repeated key is <code>E_DUPLICATE_KEY</code>:</p>
+<pre><code class="language-nano-invalid">..
+    name Ariana
+    name Mark
+</code></pre>
+<h2 id="12-json-representation-used-by-tests">12. JSON representation used by tests</h2>
+<p>Expected-result files use JSON only as a language-neutral description of the
+Nano Markup data tree:</p>
+<ul>
+<li>a Nano Markup mapping is a JSON object;</li>
+<li>a Nano Markup sequence is a JSON array;</li>
+<li>a Nano Markup string is a JSON string.</li>
+</ul>
+<p>This representation does not add JSON typing to Nano Markup. For example,
+<code>age 20</code> maps to the JSON string <code>&quot;20&quot;</code>, not the JSON number <code>20</code>.</p>
+<h2 id="13-example">13. Example</h2>
+<pre><code class="language-text">..
+    name Harvard University
+    country USA
+    address|
+        Massachusetts Hall
+        Cambridge, MA 02138
+    students:
+        ..
+            name Mark
+            age 20
+            contacts..
+                email mark@example.com
+                mobile 12345678
+</code></pre>
+<p>The example represents a root mapping. Every scalar—including <code>20</code>—is a
+string.</p>
+<h2 id="14-deferred-features">14. Deferred features</h2>
+<p>Nano Markup 1.0 does not define canonical serialization, schemas, references,
+aliases, includes, templates, executable expressions, or application-specific
+type conversion. Such features require a later specification revision.</p>
+<h2 id="15-security-and-resource-limits">15. Security and resource limits</h2>
+<p>Nano Markup has no executable directives: comments, keys, and values MUST NOT
+change parser configuration or invoke code merely by being parsed.</p>
+<p>Implementations MAY limit input bytes, line length, nesting depth, mapping or
+sequence size, and decoded string size to protect against resource exhaustion.
+Limits and the error reported when they are exceeded MUST be documented. A
+decoder MUST apply duplicate-key checks even when processing untrusted input.</p>
+<h2 id="16-normative-references">16. Normative references</h2>
+<ul>
+<li><strong>BCP 14</strong>: <a href="https://www.rfc-editor.org/info/rfc2119">RFC 2119, <em>Key words for use in RFCs to Indicate Requirement
+Levels</em></a>, as updated by
+<a href="https://www.rfc-editor.org/info/rfc8174">RFC 8174, <em>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key
+Words</em></a>.</li>
+<li><strong>UTF-8</strong>: <a href="https://www.rfc-editor.org/info/rfc3629">RFC 3629, <em>UTF-8, a transformation format of ISO
+10646</em></a>.</li>
+<li><strong>Unicode terminology</strong>: <a href="https://www.unicode.org/versions/Unicode17.0.0/">The Unicode Standard, Version
+17.0.0</a>. Nano Markup's
+accepted scalar repertoire is defined explicitly in section 2 and is not
+limited to assigned characters in that Unicode version.</li>
+</ul>
+
+      <footer>Generated deterministically from <code>SPEC.md</code>.
+        Source SHA-256: <code>d98aafcc349d891bbb59d823f184f0a132f2dc9473f41e3ea2bf62ca5d3f159a</code>.</footer>
+    </main>
+  </div>
+</body>
+</html>

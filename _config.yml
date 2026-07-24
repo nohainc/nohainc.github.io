@@ -1,3 +1,17 @@
-theme: jekyll-theme-leap-day
-plugins:
-  - jekyll-sitemap
+title: Nano Markup
+description: A minimal, indentation-based data format for strings, mappings, and sequences.
+url: https://nohainc.github.io
+baseurl: /nanomarkup.github.com
+lang: en
+repository: nohainc/nanomarkup.github.com
+version: 1.0.0
+release_date: 2026-07-23
+specification_url: https://github.com/nohainc/nanomarkup.spec/tree/v1.0.0
+release_url: https://github.com/nohainc/nanomarkup.spec/releases/tag/v1.0.0
+permalink: pretty
+strict_front_matter: true
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - tests
+  - vendor
