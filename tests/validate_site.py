@@ -9,6 +9,20 @@ from urllib.parse import urlparse
 EXPECTED_VERSION = "1.0.0"
 EXPECTED_BASE_URL = "https://nohainc.github.io/nanomarkup.github.com"
 EXPECTED_BASE_PATH = "/nanomarkup.github.com/"
+EXPECTED_IMPLEMENTATIONS_DESCRIPTION = (
+    "Install and use Nano Markup 1.0.0 for Python, Go, JavaScript, and TypeScript."
+)
+EXPECTED_IMPLEMENTATION_LINKS = {
+    "https://pypi.org/project/nanomarkup/",
+    "https://github.com/nohainc/nanomarkup.python",
+    "https://github.com/nohainc/nanomarkup.python/releases/tag/v1.0.0",
+    "https://pkg.go.dev/github.com/nohainc/nanomarkup.go",
+    "https://github.com/nohainc/nanomarkup.go",
+    "https://github.com/nohainc/nanomarkup.go/releases/tag/v1.0.0",
+    "https://www.npmjs.com/package/nanomarkup",
+    "https://github.com/nohainc/nanomarkup.javascript",
+    "https://github.com/nohainc/nanomarkup.javascript/releases/tag/v1.0.0",
+}
 FORBIDDEN_LEGACY_TEXT = (
     "one tab",
     "implicit list",
@@ -21,22 +35,41 @@ class PageParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__()
         self.links: list[str] = []
+        self.navigation_links: list[str] = []
         self.canonical: list[str] = []
-        self.descriptions = 0
-        self.titles = 0
+        self.descriptions: list[str] = []
+        self.title_parts: list[str] = []
+        self.title_count = 0
+        self.in_navigation = False
+        self.in_title = False
 
     def handle_starttag(
         self, tag: str, attrs: list[tuple[str, str | None]]
     ) -> None:
         values = dict(attrs)
+        if tag == "nav":
+            self.in_navigation = True
         if tag == "a" and values.get("href"):
             self.links.append(values["href"] or "")
+            if self.in_navigation:
+                self.navigation_links.append(values["href"] or "")
         if tag == "link" and values.get("rel") == "canonical":
             self.canonical.append(values.get("href") or "")
         if tag == "meta" and values.get("name") == "description":
-            self.descriptions += 1
+            self.descriptions.append(values.get("content") or "")
         if tag == "title":
-            self.titles += 1
+            self.title_count += 1
+            self.in_title = True
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "nav":
+            self.in_navigation = False
+        if tag == "title":
+            self.in_title = False
+
+    def handle_data(self, data: str) -> None:
+        if self.in_title:
+            self.title_parts.append(data)
 
 
 def check_page(path: Path, site: Path) -> list[str]:
@@ -46,11 +79,13 @@ def check_page(path: Path, site: Path) -> list[str]:
     parser.feed(text)
 
     relative = path.relative_to(site)
-    if parser.titles != 1:
-        errors.append(f"{relative}: expected one title, found {parser.titles}")
-    if parser.descriptions != 1:
+    if parser.title_count != 1:
         errors.append(
-            f"{relative}: expected one meta description, found {parser.descriptions}"
+            f"{relative}: expected one title, found {parser.title_count}"
+        )
+    if len(parser.descriptions) != 1:
+        errors.append(
+            f"{relative}: expected one meta description, found {len(parser.descriptions)}"
         )
     if len(parser.canonical) != 1:
         errors.append(
@@ -83,13 +118,19 @@ def main() -> int:
     required = (
         site / "index.html",
         site / "specification.html",
+        site / "implementations.html",
         site / "sitemap.xml",
         site / "robots.txt",
         site / "google34e3fed16101cfdb.html",
     )
     errors = [f"missing generated file: {path}" for path in required if not path.is_file()]
 
-    for page in (site / "index.html", site / "404.html", site / "specification.html"):
+    for page in (
+        site / "index.html",
+        site / "404.html",
+        site / "specification.html",
+        site / "implementations.html",
+    ):
         if page.is_file():
             errors.extend(check_page(page, site))
 
@@ -97,9 +138,54 @@ def main() -> int:
     if index.is_file() and EXPECTED_VERSION not in index.read_text(encoding="utf-8"):
         errors.append(f"index.html does not identify Nano Markup {EXPECTED_VERSION}")
 
+    implementations = site / "implementations.html"
+    if implementations.is_file():
+        parser = PageParser()
+        parser.feed(implementations.read_text(encoding="utf-8"))
+        expected_canonical = f"{EXPECTED_BASE_URL}/implementations.html"
+        if parser.canonical != [expected_canonical]:
+            errors.append(
+                "implementations.html: canonical URL must be "
+                f"{expected_canonical!r}"
+            )
+        title = "".join(parser.title_parts).strip()
+        if title != "Implementations — Nano Markup":
+            errors.append(f"implementations.html: unexpected title {title!r}")
+        if parser.descriptions != [EXPECTED_IMPLEMENTATIONS_DESCRIPTION]:
+            errors.append("implementations.html: unexpected meta description")
+        for navigation_link in (
+            f"{EXPECTED_BASE_PATH}specification.html",
+            f"{EXPECTED_BASE_PATH}implementations.html",
+        ):
+            if navigation_link not in parser.navigation_links:
+                errors.append(
+                    "implementations.html: missing primary navigation link "
+                    f"{navigation_link!r}"
+                )
+        missing_links = EXPECTED_IMPLEMENTATION_LINKS.difference(parser.links)
+        for link in sorted(missing_links):
+            errors.append(f"implementations.html: missing implementation link {link!r}")
+        text = implementations.read_text(encoding="utf-8")
+        for required_text in (
+            "Python 3.11+",
+            "Go 1.24+",
+            "Node.js 22+",
+            "npm install nanomarkup",
+            "Stable 1.0.0",
+            "112-case shared conformance corpus",
+        ):
+            if required_text not in text:
+                errors.append(
+                    f"implementations.html: missing required text {required_text!r}"
+                )
+
     sitemap = site / "sitemap.xml"
-    if sitemap.is_file() and EXPECTED_BASE_URL not in sitemap.read_text(encoding="utf-8"):
-        errors.append("sitemap.xml does not use the canonical site URL")
+    if sitemap.is_file():
+        sitemap_text = sitemap.read_text(encoding="utf-8")
+        if EXPECTED_BASE_URL not in sitemap_text:
+            errors.append("sitemap.xml does not use the canonical site URL")
+        if f"{EXPECTED_BASE_URL}/implementations.html" not in sitemap_text:
+            errors.append("sitemap.xml does not include implementations.html")
 
     if errors:
         print("Website validation failed:")

@@ -5,7 +5,7 @@ baseurl: /nanomarkup.github.com
 lang: en
 repository: nohainc/nanomarkup.github.com
 version: 1.0.0
-release_date: 2026-07-23
+release_date: 2026-07-24
 specification_url: https://github.com/nohainc/nanomarkup.spec/tree/v1.0.0
 release_url: https://github.com/nohainc/nanomarkup.spec/releases/tag/v1.0.0
 permalink: pretty
