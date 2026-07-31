@@ -11,7 +11,7 @@ permalink: /
   <p class="lede">Nano Markup is a minimal, indentation-based format for representing strings, mappings, and sequences in a form designed to be easy for people to read and write.</p>
   <div class="actions">
     <a class="button primary" href="https://nohainc.github.io/nanomarkup.github.com/specification.html">Read the specification</a>
-    <a class="button" href="https://github.com/nohainc/nanomarkup.spec/releases/tag/v1.0.0">Get Nano Markup 1.0.0</a>
+    <a class="button" href="{{ '/implementations.html' | relative_url }}">Use Nano Markup</a>
   </div>
 </section>
 
@@ -100,20 +100,23 @@ permalink: /
     </a>
     <a href="https://github.com/nohainc/nanomarkup.python">
       <strong>Python implementation</strong>
+      <small>Stable 1.0.0 · Python 3.11+</small>
       <span>Decode and encode Nano Markup using native Python values.</span>
     </a>
     <a href="https://github.com/nohainc/nanomarkup.go">
       <strong>Go implementation</strong>
+      <small>Stable 1.0.0 · Go 1.24+</small>
       <span>Decode and encode with typed String, Mapping, and Sequence values.</span>
     </a>
   </div>
+  <p class="implementation-link"><a href="{{ '/implementations.html' | relative_url }}">Compare and install implementations →</a></p>
 </section>
 
 <section class="release-callout" aria-labelledby="release-heading">
   <div>
     <p class="eyebrow">Stable release</p>
     <h2 id="release-heading">Nano Markup 1.0.0</h2>
-    <p>The first stable language specification was published on July 23, 2026. Stable releases are immutable; any known errors are recorded separately as errata.</p>
+    <p>The first stable language specification was published on July 24, 2026. Stable releases are immutable; any known errors are recorded separately as errata.</p>
   </div>
   <a class="button" href="https://github.com/nohainc/nanomarkup.spec/releases/tag/v1.0.0">Release notes and downloads</a>
 </section>

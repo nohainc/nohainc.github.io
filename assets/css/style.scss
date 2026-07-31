@@ -29,6 +29,7 @@ body {
 
 a { color: var(--green); text-underline-offset: 0.2em; }
 a:hover { color: var(--accent-dark); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 
 .skip-link {
   position: fixed;
@@ -131,7 +132,33 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .link-grid a { display: flex; flex-direction: column; min-height: 13rem; padding: 1.5rem; border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
 .link-grid a:hover { border-color: var(--accent-dark); color: var(--accent-dark); }
 .link-grid strong { font-size: 1.2rem; }
+.link-grid small { margin-top: 0.4rem; color: var(--accent-dark); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
 .link-grid span { margin-top: auto; color: var(--muted); font-size: 0.94rem; }
+.implementation-link { margin: 1.2rem 0 0; }
+
+.implementations-hero { max-width: 70rem; }
+.implementations-hero h1 { max-width: 15ch; }
+.implementation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.implementation-card { min-width: 0; padding: clamp(1.4rem, 3vw, 2rem); border: 1px solid var(--line); }
+.implementation-card > p { color: var(--muted); }
+.implementation-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.implementation-card-header .eyebrow { margin-bottom: 0.4rem; }
+.implementation-card h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+.status-badge { flex: 0 0 auto; padding: 0.35rem 0.55rem; border: 1px solid var(--green); border-radius: 999px; color: var(--green); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
+.implementation-meta { display: grid; grid-template-columns: repeat(3, 1fr); margin: 1.5rem 0; border-block: 1px solid var(--line); }
+.implementation-meta div { padding: 0.8rem 0; }
+.implementation-meta dt { color: var(--muted); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.implementation-meta dd { margin: 0.15rem 0 0; font-size: 0.9rem; font-weight: 700; }
+.install-block { display: grid; gap: 0.35rem; padding: 1rem; overflow-x: auto; background: var(--paper-strong); }
+.install-block span { color: var(--muted); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+.install-block code { white-space: nowrap; }
+.implementation-card .usage-example { min-height: 12rem; margin-top: 1rem; background: var(--code); color: var(--code-ink); font-size: 0.85rem; }
+.implementation-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.7rem; margin-top: 1rem; }
+.implementation-actions .button { min-height: 2.7rem; }
+.text-link { font-size: 0.85rem; font-weight: 700; }
+.conformance-callout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(20rem, 1fr); gap: 2rem 5rem; }
+.conformance-copy { color: var(--muted); }
+.conformance-copy p:first-child { margin-top: 0; }
 
 .release-callout { display: flex; justify-content: space-between; align-items: end; gap: 2rem; }
 .release-callout p:not(.eyebrow) { max-width: 45rem; color: var(--muted); }
@@ -145,14 +172,17 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
 @media (max-width: 760px) {
   nav { gap: 0.8rem; }
-  nav a:nth-child(2) { display: none; }
-  .section-heading, .code-grid, .card-grid, .link-grid, .syntax { grid-template-columns: 1fr; }
+  nav a:nth-child(n+3) { display: none; }
+  .section-heading, .code-grid, .card-grid, .link-grid, .syntax, .implementation-grid, .conformance-callout { grid-template-columns: 1fr; }
   .syntax-table { grid-column: 1; grid-row: auto; }
   pre { min-height: 0; }
+  .implementation-card-header { display: block; }
+  .status-badge { display: inline-block; margin-top: 0.8rem; }
+  .implementation-meta { grid-template-columns: 1fr; }
+  .implementation-meta div + div { border-top: 1px solid var(--line); }
   .release-callout, .site-footer { align-items: flex-start; flex-direction: column; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
-
