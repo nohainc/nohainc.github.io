@@ -1,20 +1,20 @@
 ---
 layout: default
 title: Implementations
-description: Install and use the stable Nano Markup 1.0.0 implementations for Python and Go.
+description: Install and use Nano Markup 1.0.0 for Python, Go, JavaScript, and TypeScript.
 permalink: /implementations.html
 ---
 
 <section class="hero implementations-hero">
   <p class="eyebrow">Stable implementations</p>
-  <h1>Use Nano Markup<br><span>in Python or Go.</span></h1>
-  <p class="lede">Both implementations provide conforming Nano Markup 1.0.0 decoders and writers. Choose the value model that fits your application, install the package, and keep the language specification independent from your codebase.</p>
+  <h1>Use Nano Markup<br><span>in your language.</span></h1>
+  <p class="lede">The Python, Go, and JavaScript/TypeScript implementations provide conforming Nano Markup 1.0.0 decoders and writers. Choose the value model that fits your application, install the package, and keep the language specification independent from your codebase.</p>
 </section>
 
 <section class="implementations" aria-labelledby="implementations-heading">
   <div class="section-heading">
     <p class="eyebrow">Choose your language</p>
-    <h2 id="implementations-heading">Two independent implementations</h2>
+    <h2 id="implementations-heading">Three independent implementations</h2>
   </div>
 
   <div class="implementation-grid">
@@ -75,6 +75,35 @@ source, err := nanomarkup.Encode(value)</code></pre>
         <a class="text-link" href="https://github.com/nohainc/nanomarkup.go/releases/tag/v1.0.0">Release v1.0.0 →</a>
       </div>
     </article>
+
+    <article class="implementation-card" id="javascript">
+      <header class="implementation-card-header">
+        <div>
+          <p class="eyebrow">JavaScript &amp; TypeScript</p>
+          <h2>Nano Markup for the web</h2>
+        </div>
+        <span class="status-badge">Stable 1.0.0</span>
+      </header>
+      <p>A zero-runtime-dependency parser and serializer with ESM, CommonJS, browser-compatible code, and TypeScript declarations.</p>
+      <dl class="implementation-meta">
+        <div><dt>Requires</dt><dd>Node.js 22+ or a modern browser</dd></div>
+        <div><dt>Profiles</dt><dd>Decoder and writer</dd></div>
+        <div><dt>Spec</dt><dd>Nano Markup 1.0.0</dd></div>
+      </dl>
+      <div class="install-block" aria-label="Install Nano Markup for JavaScript and TypeScript">
+        <span>Install</span>
+        <code>npm install nanomarkup</code>
+      </div>
+      <pre class="usage-example"><code>import { parse, stringify } from "nanomarkup";
+
+const value = parse("..\n    name Ariana");
+const source = stringify(value);</code></pre>
+      <div class="implementation-actions">
+        <a class="button primary" href="https://www.npmjs.com/package/nanomarkup">View on npm</a>
+        <a class="button" href="https://github.com/nohainc/nanomarkup.javascript">Source and API</a>
+        <a class="text-link" href="https://github.com/nohainc/nanomarkup.javascript/releases/tag/v1.0.0">Release v1.0.0 →</a>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -84,7 +113,7 @@ source, err := nanomarkup.Encode(value)</code></pre>
     <h2 id="conformance-heading">One language, matching data trees</h2>
   </div>
   <div class="conformance-copy">
-    <p>Python and Go both pass the complete 112-case shared conformance corpus for decoding and writing. Each implementation also reads output produced by the other, including LF and CRLF documents.</p>
+    <p>Python, Go, and JavaScript/TypeScript pass the complete 112-case shared conformance corpus for decoding and writing. All three implementations cross-read one another's output, including LF and CRLF documents.</p>
     <p>The implementations are practical tools, not normative definitions of Nano Markup. The <a href="{{ '/specification.html' | relative_url }}">1.0.0 specification</a> remains the authority for syntax, data-model, and error behavior.</p>
   </div>
 </section>

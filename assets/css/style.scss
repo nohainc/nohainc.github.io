@@ -128,7 +128,7 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .syntax-table > div { display: flex; justify-content: space-between; gap: 1rem; padding: 0.85rem 0; border-bottom: 1px solid var(--line); }
 .syntax-table code { color: var(--accent-dark); }
 
-.link-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.link-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
 .link-grid a { display: flex; flex-direction: column; min-height: 13rem; padding: 1.5rem; border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
 .link-grid a:hover { border-color: var(--accent-dark); color: var(--accent-dark); }
 .link-grid strong { font-size: 1.2rem; }
@@ -138,12 +138,12 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
 .implementations-hero { max-width: 70rem; }
 .implementations-hero h1 { max-width: 15ch; }
-.implementation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.implementation-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
 .implementation-card { min-width: 0; padding: clamp(1.4rem, 3vw, 2rem); border: 1px solid var(--line); }
 .implementation-card > p { color: var(--muted); }
 .implementation-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
 .implementation-card-header .eyebrow { margin-bottom: 0.4rem; }
-.implementation-card h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+.implementation-card h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); }
 .status-badge { flex: 0 0 auto; padding: 0.35rem 0.55rem; border: 1px solid var(--green); border-radius: 999px; color: var(--green); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
 .implementation-meta { display: grid; grid-template-columns: repeat(3, 1fr); margin: 1.5rem 0; border-block: 1px solid var(--line); }
 .implementation-meta div { padding: 0.8rem 0; }

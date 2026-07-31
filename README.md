@@ -108,6 +108,11 @@ permalink: /
       <small>Stable 1.0.0 · Go 1.24+</small>
       <span>Decode and encode with typed String, Mapping, and Sequence values.</span>
     </a>
+    <a href="https://github.com/nohainc/nanomarkup.javascript">
+      <strong>JavaScript &amp; TypeScript</strong>
+      <small>Stable 1.0.0 · Node.js 22+ · Browsers</small>
+      <span>Parse and stringify with ESM, CommonJS, and first-class types.</span>
+    </a>
   </div>
   <p class="implementation-link"><a href="{{ '/implementations.html' | relative_url }}">Compare and install implementations →</a></p>
 </section>

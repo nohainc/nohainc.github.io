@@ -10,7 +10,7 @@ EXPECTED_VERSION = "1.0.0"
 EXPECTED_BASE_URL = "https://nohainc.github.io/nanomarkup.github.com"
 EXPECTED_BASE_PATH = "/nanomarkup.github.com/"
 EXPECTED_IMPLEMENTATIONS_DESCRIPTION = (
-    "Install and use the stable Nano Markup 1.0.0 implementations for Python and Go."
+    "Install and use Nano Markup 1.0.0 for Python, Go, JavaScript, and TypeScript."
 )
 EXPECTED_IMPLEMENTATION_LINKS = {
     "https://pypi.org/project/nanomarkup/",
@@ -19,6 +19,9 @@ EXPECTED_IMPLEMENTATION_LINKS = {
     "https://pkg.go.dev/github.com/nohainc/nanomarkup.go",
     "https://github.com/nohainc/nanomarkup.go",
     "https://github.com/nohainc/nanomarkup.go/releases/tag/v1.0.0",
+    "https://www.npmjs.com/package/nanomarkup",
+    "https://github.com/nohainc/nanomarkup.javascript",
+    "https://github.com/nohainc/nanomarkup.javascript/releases/tag/v1.0.0",
 }
 FORBIDDEN_LEGACY_TEXT = (
     "one tab",
@@ -166,6 +169,8 @@ def main() -> int:
         for required_text in (
             "Python 3.11+",
             "Go 1.24+",
+            "Node.js 22+",
+            "npm install nanomarkup",
             "Stable 1.0.0",
             "112-case shared conformance corpus",
         ):
