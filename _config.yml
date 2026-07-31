@@ -1,9 +1,9 @@
 title: Nano Markup
 description: A minimal, indentation-based data format for strings, mappings, and sequences.
 url: https://nohainc.github.io
-baseurl: /nanomarkup.github.com
+baseurl: ""
 lang: en
-repository: nohainc/nanomarkup.github.com
+repository: nohainc/nohainc.github.io
 version: 1.0.0
 release_date: 2026-07-24
 specification_url: https://github.com/nohainc/nanomarkup.spec/tree/v1.0.0

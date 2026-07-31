@@ -10,7 +10,7 @@ permalink: /
   <h1>Structured data,<br><span>without the visual noise.</span></h1>
   <p class="lede">Nano Markup is a minimal, indentation-based format for representing strings, mappings, and sequences in a form designed to be easy for people to read and write.</p>
   <div class="actions">
-    <a class="button primary" href="https://nohainc.github.io/nanomarkup.github.com/specification.html">Read the specification</a>
+    <a class="button primary" href="{{ '/specification.html' | relative_url }}">Read the specification</a>
     <a class="button" href="{{ '/implementations.html' | relative_url }}">Use Nano Markup</a>
   </div>
 </section>
