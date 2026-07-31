@@ -115,7 +115,7 @@ permalink: /
     </a>
     <a href="https://github.com/nohainc/nanomarkup.dart">
       <strong>Dart implementation</strong>
-      <small>Release ready · Dart 3.12+ · Web · Flutter</small>
+      <small>Stable 1.0.0 · Dart 3.12+ · Web · Flutter</small>
       <span>Decode and encode using native Dart values across every Dart platform.</span>
     </a>
   </div>

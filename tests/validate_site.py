@@ -22,10 +22,8 @@ EXPECTED_IMPLEMENTATION_LINKS = {
     "https://www.npmjs.com/package/nanomarkup",
     "https://github.com/nohainc/nanomarkup.javascript",
     "https://github.com/nohainc/nanomarkup.javascript/releases/tag/v1.0.0",
-    "https://github.com/nohainc/nanomarkup.dart",
-}
-FORBIDDEN_UNPUBLISHED_LINKS = {
     "https://pub.dev/packages/nanomarkup",
+    "https://github.com/nohainc/nanomarkup.dart",
     "https://github.com/nohainc/nanomarkup.dart/releases/tag/v1.0.0",
 }
 FORBIDDEN_LEGACY_TEXT = (
@@ -170,9 +168,6 @@ def main() -> int:
         missing_links = EXPECTED_IMPLEMENTATION_LINKS.difference(parser.links)
         for link in sorted(missing_links):
             errors.append(f"implementations.html: missing implementation link {link!r}")
-        premature_links = FORBIDDEN_UNPUBLISHED_LINKS.intersection(parser.links)
-        for link in sorted(premature_links):
-            errors.append(f"implementations.html: premature Dart release link {link!r}")
         text = implementations.read_text(encoding="utf-8")
         for required_text in (
             "Python 3.11+",
@@ -182,7 +177,6 @@ def main() -> int:
             "npm install nanomarkup",
             "dart pub add nanomarkup",
             "Stable 1.0.0",
-            "Release ready",
             "112-case shared conformance corpus",
         ):
             if required_text not in text:

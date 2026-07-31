@@ -145,7 +145,6 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .implementation-card-header .eyebrow { margin-bottom: 0.4rem; }
 .implementation-card h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); }
 .status-badge { flex: 0 0 auto; padding: 0.35rem 0.55rem; border: 1px solid var(--green); border-radius: 999px; color: var(--green); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
-.status-badge.release-ready { border-color: var(--accent-dark); color: var(--accent-dark); }
 .implementation-meta { display: grid; grid-template-columns: repeat(3, 1fr); margin: 1.5rem 0; border-block: 1px solid var(--line); }
 .implementation-meta div { padding: 0.8rem 0; }
 .implementation-meta dt { color: var(--muted); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
