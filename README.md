@@ -113,6 +113,11 @@ permalink: /
       <small>Stable 1.0.0 · Node.js 22+ · Browsers</small>
       <span>Parse and stringify with ESM, CommonJS, and first-class types.</span>
     </a>
+    <a href="https://github.com/nohainc/nanomarkup.dart">
+      <strong>Dart implementation</strong>
+      <small>Release ready · Dart 3.12+ · Web · Flutter</small>
+      <span>Decode and encode using native Dart values across every Dart platform.</span>
+    </a>
   </div>
   <p class="implementation-link"><a href="{{ '/implementations.html' | relative_url }}">Compare and install implementations →</a></p>
 </section>

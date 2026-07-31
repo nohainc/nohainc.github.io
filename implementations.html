@@ -1,20 +1,20 @@
 ---
 layout: default
 title: Implementations
-description: Install and use Nano Markup 1.0.0 for Python, Go, JavaScript, and TypeScript.
+description: Compare Nano Markup 1.0.0 for Python, Go, JavaScript, TypeScript, and Dart.
 permalink: /implementations.html
 ---
 
 <section class="hero implementations-hero">
-  <p class="eyebrow">Stable implementations</p>
+  <p class="eyebrow">Stable and release-ready implementations</p>
   <h1>Use Nano Markup<br><span>in your language.</span></h1>
-  <p class="lede">The Python, Go, and JavaScript/TypeScript implementations provide conforming Nano Markup 1.0.0 decoders and writers. Choose the value model that fits your application, install the package, and keep the language specification independent from your codebase.</p>
+  <p class="lede">Python, Go, JavaScript/TypeScript, and the release-ready Dart package provide conforming Nano Markup 1.0.0 decoders and writers. Choose the native value model that fits your application while keeping the language specification independent from your codebase.</p>
 </section>
 
 <section class="implementations" aria-labelledby="implementations-heading">
   <div class="section-heading">
     <p class="eyebrow">Choose your language</p>
-    <h2 id="implementations-heading">Three independent implementations</h2>
+    <h2 id="implementations-heading">Four independent implementations</h2>
   </div>
 
   <div class="implementation-grid">
@@ -104,6 +104,34 @@ const source = stringify(value);</code></pre>
         <a class="text-link" href="https://github.com/nohainc/nanomarkup.javascript/releases/tag/v1.0.0">Release v1.0.0 →</a>
       </div>
     </article>
+
+    <article class="implementation-card" id="dart">
+      <header class="implementation-card-header">
+        <div>
+          <p class="eyebrow">Dart</p>
+          <h2>Nano Markup for Dart</h2>
+        </div>
+        <span class="status-badge release-ready">Release ready</span>
+      </header>
+      <p>A zero-runtime-dependency decoder and writer using native <code>String</code>, <code>Map</code>, and <code>List</code> values on the Dart VM, web, and Flutter.</p>
+      <dl class="implementation-meta">
+        <div><dt>Requires</dt><dd>Dart 3.12+</dd></div>
+        <div><dt>Profiles</dt><dd>Decoder and writer</dd></div>
+        <div><dt>Spec</dt><dd>Nano Markup 1.0.0</dd></div>
+      </dl>
+      <div class="install-block" aria-label="Install Nano Markup for Dart after publication">
+        <span>After publication</span>
+        <code>dart pub add nanomarkup</code>
+      </div>
+      <pre class="usage-example"><code>import 'package:nanomarkup/nanomarkup.dart';
+
+final value = decode("..\n    name Ariana");
+final source = encode(value);</code></pre>
+      <div class="implementation-actions">
+        <a class="button primary" href="https://github.com/nohainc/nanomarkup.dart">Source and API</a>
+        <span class="text-link">pub.dev release pending</span>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -113,7 +141,7 @@ const source = stringify(value);</code></pre>
     <h2 id="conformance-heading">One language, matching data trees</h2>
   </div>
   <div class="conformance-copy">
-    <p>Python, Go, and JavaScript/TypeScript pass the complete 112-case shared conformance corpus for decoding and writing. All three implementations cross-read one another's output, including LF and CRLF documents.</p>
+    <p>Python, Go, JavaScript/TypeScript, and Dart pass the complete 112-case shared conformance corpus for decoding and writing. All four codebases cross-read one another's output, including LF and CRLF documents.</p>
     <p>The implementations are practical tools, not normative definitions of Nano Markup. The <a href="{{ '/specification.html' | relative_url }}">1.0.0 specification</a> remains the authority for syntax, data-model, and error behavior.</p>
   </div>
 </section>
