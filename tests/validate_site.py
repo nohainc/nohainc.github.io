@@ -7,8 +7,8 @@ from urllib.parse import urlparse
 
 
 EXPECTED_VERSION = "1.0.0"
-EXPECTED_BASE_URL = "https://nohainc.github.io/nanomarkup.github.com"
-EXPECTED_BASE_PATH = "/nanomarkup.github.com/"
+EXPECTED_BASE_URL = "https://nohainc.github.io"
+EXPECTED_BASE_PATH = "/"
 EXPECTED_IMPLEMENTATIONS_DESCRIPTION = (
     "Compare Nano Markup 1.0.0 for Python, Go, JavaScript, TypeScript, and Dart."
 )
@@ -27,6 +27,7 @@ EXPECTED_IMPLEMENTATION_LINKS = {
     "https://github.com/nohainc/nanomarkup.dart/releases/tag/v1.0.0",
 }
 FORBIDDEN_LEGACY_TEXT = (
+    "nanomarkup.github.com",
     "one tab",
     "implicit list",
     "description This is a multi-line value",
@@ -39,6 +40,7 @@ class PageParser(HTMLParser):
         super().__init__()
         self.links: list[str] = []
         self.navigation_links: list[str] = []
+        self.stylesheets: list[str] = []
         self.canonical: list[str] = []
         self.descriptions: list[str] = []
         self.title_parts: list[str] = []
@@ -58,6 +60,10 @@ class PageParser(HTMLParser):
                 self.navigation_links.append(values["href"] or "")
         if tag == "link" and values.get("rel") == "canonical":
             self.canonical.append(values.get("href") or "")
+        if tag == "link" and values.get("rel") == "stylesheet":
+            href = values.get("href") or ""
+            self.stylesheets.append(href)
+            self.links.append(href)
         if tag == "meta" and values.get("name") == "description":
             self.descriptions.append(values.get("content") or "")
         if tag == "title":
@@ -96,6 +102,13 @@ def check_page(path: Path, site: Path) -> list[str]:
         )
     elif not parser.canonical[0].startswith(EXPECTED_BASE_URL):
         errors.append(f"{relative}: unexpected canonical URL {parser.canonical[0]!r}")
+
+    if relative.name != "specification.html" and parser.stylesheets != [
+        "/assets/css/style.css"
+    ]:
+        errors.append(
+            f"{relative}: expected root stylesheet URL, found {parser.stylesheets!r}"
+        )
 
     for href in parser.links:
         parsed = urlparse(href)
