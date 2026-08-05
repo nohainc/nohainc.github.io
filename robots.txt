@@ -1,9 +1,4 @@
----
-layout: null
-permalink: /robots.txt
----
 User-agent: *
-Allow: /
+Disallow:
 
-Sitemap: {{ '/sitemap.xml' | absolute_url }}
-
+Sitemap: https://nohainc.github.io/sitemap.xml
