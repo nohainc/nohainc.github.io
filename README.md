@@ -158,6 +158,11 @@ permalink: /
       <small>Stable 1.0.0 · Rust stable</small>
       <span>Decode and encode with idiomatic Rust values and a validator CLI.</span>
     </a>
+    <a href="https://github.com/nohainc/nanomarkup.swift">
+      <strong>Swift implementation</strong>
+      <small>Stable 1.0.0 · Swift 6+</small>
+      <span>Decode and encode with idiomatic Swift values.</span>
+    </a>
   </div>
   <p class="implementation-link"><a href="{{ '/implementations.html' | relative_url }}">Compare and install implementations →</a></p>
 </section>

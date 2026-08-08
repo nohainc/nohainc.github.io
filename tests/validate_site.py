@@ -10,7 +10,7 @@ EXPECTED_VERSION = "1.0.0"
 EXPECTED_BASE_URL = "https://nohainc.github.io"
 EXPECTED_BASE_PATH = "/"
 EXPECTED_IMPLEMENTATIONS_DESCRIPTION = (
-    "Compare Nano Markup implementations for Python, Go, JavaScript, TypeScript, Dart, Java, .NET, C, C++, and Rust."
+    "Compare Nano Markup implementations for Python, Go, JavaScript, TypeScript, Dart, Java, .NET, C, C++, Rust, and Swift."
 )
 EXPECTED_IMPLEMENTATION_LINKS = {
     "https://pypi.org/project/nanomarkup/",
@@ -33,6 +33,8 @@ EXPECTED_IMPLEMENTATION_LINKS = {
     "https://github.com/nohainc/nanomarkup.c/releases/tag/v1.0.0",
     "https://github.com/nohainc/nanomarkup.rust",
     "https://github.com/nohainc/nanomarkup.rust/releases/tag/v1.0.0",
+    "https://github.com/nohainc/nanomarkup.swift",
+    "https://github.com/nohainc/nanomarkup.swift/releases/tag/v1.0.0",
 }
 EXPECTED_SITE_PAGES = (
     "index.html",
@@ -228,6 +230,7 @@ def main() -> int:
             ".NET 8+",
             "C11 / C++17+",
             "Rust stable",
+            "Swift 6+",
             "cargo add nanomarkup",
             "npm install nanomarkup",
             "dart pub add nanomarkup",
