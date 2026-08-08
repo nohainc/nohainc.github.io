@@ -1,0 +1,91 @@
+---
+layout: default
+title: Nano Markup Examples
+description: Practical Nano Markup examples for profiles, catalogs, project metadata, colors, text values, empty values, and JSON comparisons.
+permalink: /examples.html
+---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Nano Markup Examples",
+  "description": "Practical Nano Markup examples with paired JSON data.",
+  "url": "https://nohainc.github.io/examples.html",
+  "about": ["Nano Markup examples", "JSON comparison", "data format examples"]
+}
+</script>
+
+<section class="hero doc-hero">
+  <p class="eyebrow">Examples</p>
+  <h1>Nano Markup by example.</h1>
+  <p class="lede">These examples show the everyday shapes Nano Markup is designed for: profiles, catalogs, project metadata, text blocks, empty values, and root strings. Each example also has a paired JSON file in the specification repository.</p>
+</section>
+<p class="page-next">New to the format? Read the <a href="{{ '/tutorial.html' | relative_url }}">tutorial</a>, see <a href="{{ '/why-nano-markup.html' | relative_url }}">why Nano Markup exists</a>, or review the <a href="{{ '/specification.html' | relative_url }}">specification</a>.</p>
+
+<section class="doc-section" aria-labelledby="examples-grid-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Patterns</p>
+    <h2 id="examples-grid-heading">Common document shapes</h2>
+  </div>
+  <div class="link-grid">
+    <a href="https://github.com/nohainc/nanomarkup.spec/blob/v1.0.0/examples/profile.nano">
+      <strong>Profile data</strong>
+      <small>Mapping · sequence · multiline text</small>
+      <span>A compact contact-like record with nested values.</span>
+    </a>
+    <a href="https://github.com/nohainc/nanomarkup.spec/blob/v1.0.0/examples/catalog.nano">
+      <strong>Catalog data</strong>
+      <small>Repeated objects</small>
+      <span>A product-style catalog represented as nested mappings and sequences.</span>
+    </a>
+    <a href="https://github.com/nohainc/nanomarkup.spec/blob/v1.0.0/examples/project.nano">
+      <strong>Project metadata</strong>
+      <small>Configuration-like data</small>
+      <span>A readable project manifest with lists, sections, and scalar text.</span>
+    </a>
+    <a href="https://github.com/nohainc/nanomarkup.spec/blob/v1.0.0/examples/text-values.nano">
+      <strong>Text values</strong>
+      <small>Strings and blocks</small>
+      <span>Examples of raw, quoted, empty, and multiline strings.</span>
+    </a>
+    <a href="https://github.com/nohainc/nanomarkup.spec/blob/v1.0.0/examples/empty-values.nano">
+      <strong>Empty values</strong>
+      <small>Empty string · mapping · sequence</small>
+      <span>Shows how empty containers and empty strings are represented.</span>
+    </a>
+    <a href="https://github.com/nohainc/nanomarkup.spec/tree/v1.0.0/examples">
+      <strong>All paired examples</strong>
+      <small>Nano and JSON</small>
+      <span>Browse every <code>.nano</code> file with its matching JSON data tree.</span>
+    </a>
+  </div>
+</section>
+
+<section class="doc-section" aria-labelledby="examples-inline-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Quick read</p>
+    <h2 id="examples-inline-heading">A readable profile</h2>
+  </div>
+  <div class="code-grid">
+    <figure>
+      <figcaption>Nano Markup</figcaption>
+      <pre><code>..
+    name Ariana
+    languages:
+        Slovak
+        English
+    address|
+        20 Forest Street
+        811 01 Bratislava</code></pre>
+    </figure>
+    <figure>
+      <figcaption>Data tree</figcaption>
+      <pre><code>{
+  "name": "Ariana",
+  "languages": ["Slovak", "English"],
+  "address": "20 Forest Street\n811 01 Bratislava"
+}</code></pre>
+    </figure>
+  </div>
+</section>

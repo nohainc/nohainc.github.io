@@ -1,0 +1,37 @@
+---
+layout: default
+title: Nano Markup vs TOML
+description: Compare Nano Markup and TOML for small configuration files, nested data, multiline strings, arrays, and tables.
+permalink: /nano-markup-vs-toml.html
+---
+
+<section class="hero doc-hero">
+  <p class="eyebrow">Comparison</p>
+  <h1>Nano Markup vs TOML.</h1>
+  <p class="lede">TOML is a popular configuration format with typed scalar values and table syntax. Nano Markup is smaller: a tree of strings, mappings, and sequences written with indentation.</p>
+</section>
+
+<section class="doc-section" aria-labelledby="toml-table-heading">
+  <div class="section-heading">
+    <p class="eyebrow">At a glance</p>
+    <h2 id="toml-table-heading">Tables and types, or a small tree</h2>
+  </div>
+  <div class="comparison-table" role="table" aria-label="Nano Markup and TOML comparison">
+    <div role="row"><strong role="cell">Structure</strong><span role="cell">Nano Markup nests data by indentation. TOML uses keys, tables, arrays, and arrays of tables.</span></div>
+    <div role="row"><strong role="cell">Types</strong><span role="cell">Nano Markup stores scalar text as strings. TOML supports numbers, booleans, dates, times, arrays, and inline tables.</span></div>
+    <div role="row"><strong role="cell">Multiline text</strong><span role="cell">Nano Markup uses block strings with <code>|</code>. TOML uses multiline string delimiters.</span></div>
+    <div role="row"><strong role="cell">Best fit</strong><span role="cell">Nano Markup fits simple document-shaped data. TOML fits application configuration that benefits from typed values.</span></div>
+  </div>
+</section>
+
+<section class="doc-section" aria-labelledby="toml-choice-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Choosing</p>
+    <h2 id="toml-choice-heading">Use the format that matches the job</h2>
+  </div>
+  <div class="doc-copy">
+    <p>Choose Nano Markup if a strict, readable tree is the main goal and your application already knows how to interpret strings. Choose TOML if native typed values and mature configuration tooling are more important.</p>
+    <p>Both formats are useful. Nano Markup is intentionally narrower, which can be an advantage when implementations must stay small and interoperable.</p>
+  </div>
+</section>
+<p class="page-next">See the comparisons with <a href="{{ '/nano-markup-vs-yaml.html' | relative_url }}">YAML</a> and <a href="{{ '/nano-markup-vs-json.html' | relative_url }}">JSON</a>, then browse the <a href="{{ '/examples.html' | relative_url }}">examples</a>.</p>
