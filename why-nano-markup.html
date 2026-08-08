@@ -1,0 +1,67 @@
+---
+layout: default
+title: Why Nano Markup
+description: "Why Nano Markup exists: a small, readable data format for strings, mappings, sequences, and configuration-like documents."
+permalink: /why-nano-markup.html
+---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Why Nano Markup",
+  "description": "Why Nano Markup exists as a small, readable data format.",
+  "about": ["data format", "markup language", "configuration files"],
+  "url": "https://nohainc.github.io/why-nano-markup.html"
+}
+</script>
+
+<section class="hero doc-hero">
+  <p class="eyebrow">Purpose</p>
+  <h1>Why Nano Markup exists.</h1>
+  <p class="lede">Nano Markup is a deliberately small data format for documents that need to stay readable as plain text. It keeps the value model to strings, mappings, and sequences so files can be easy to scan, diff, review, and implement.</p>
+</section>
+
+<section class="doc-section" aria-labelledby="why-readable-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Readable data</p>
+    <h2 id="why-readable-heading">A format for ordinary text files</h2>
+  </div>
+  <div class="doc-copy">
+    <p>Many projects need a human-readable data format before they need a large configuration language. Nano Markup focuses on the common shape: named fields, ordered lists, nested groups, and multiline text.</p>
+    <p>It does not infer numbers, booleans, nulls, dates, anchors, tags, references, or schemas. Applications decide how to interpret strings after parsing. That keeps the language predictable and the parser contract small.</p>
+  </div>
+</section>
+
+<section class="doc-section" aria-labelledby="why-use-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Use cases</p>
+    <h2 id="why-use-heading">Where Nano Markup fits</h2>
+  </div>
+  <div class="card-grid">
+    <article>
+      <span class="symbol">cfg</span>
+      <h3>Small configuration files</h3>
+      <p>Use Nano Markup when text, sections, and lists matter more than numeric type inference or complex references.</p>
+    </article>
+    <article>
+      <span class="symbol">doc</span>
+      <h3>Readable content data</h3>
+      <p>Store metadata, manifests, catalogs, profiles, notes, and documentation-adjacent data in a compact plain-text form.</p>
+    </article>
+    <article>
+      <span class="symbol">api</span>
+      <h3>Interoperable fixtures</h3>
+      <p>Use the stable 1.0.0 grammar and shared conformance corpus when multiple implementations need to agree exactly.</p>
+    </article>
+  </div>
+</section>
+
+<section class="release-callout" aria-labelledby="why-next-heading">
+  <div>
+    <p class="eyebrow">Next step</p>
+    <h2 id="why-next-heading">Compare it with familiar formats</h2>
+    <p>Most readers meet Nano Markup by comparing it with JSON, YAML, or TOML. The comparison pages show where it is smaller, where it is stricter, and where another format may be a better fit.</p>
+  </div>
+  <a class="button" href="{{ '/nano-markup-vs-yaml.html' | relative_url }}">Nano Markup vs YAML</a>
+</section>
