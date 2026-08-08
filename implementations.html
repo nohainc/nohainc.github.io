@@ -1,20 +1,20 @@
 ---
 layout: default
 title: Implementations
-description: Compare Nano Markup 1.0.0 for Python, Go, JavaScript, TypeScript, Dart, and Java.
+description: Compare Nano Markup 1.0.0 for Python, Go, JavaScript, TypeScript, Dart, Java, and .NET.
 permalink: /implementations.html
 ---
 
 <section class="hero implementations-hero">
   <p class="eyebrow">Stable implementations</p>
   <h1>Use Nano Markup<br><span>in your language.</span></h1>
-  <p class="lede">Python, Go, JavaScript/TypeScript, Dart, and Java provide stable, conforming Nano Markup 1.0.0 decoders and writers. Choose the native value model that fits your application while keeping the language specification independent from your codebase.</p>
+  <p class="lede">Python, Go, JavaScript/TypeScript, Dart, Java, and .NET provide stable, conforming Nano Markup 1.0.0 decoders and writers. Choose the native value model that fits your application while keeping the language specification independent from your codebase.</p>
 </section>
 
 <section class="implementations" aria-labelledby="implementations-heading">
   <div class="section-heading">
     <p class="eyebrow">Choose your language</p>
-    <h2 id="implementations-heading">Five independent implementations</h2>
+    <h2 id="implementations-heading">Six independent implementations</h2>
   </div>
 
   <div class="implementation-grid">
@@ -146,6 +146,16 @@ final source = encode(value);</code></pre>
 var source = NanoMarkup.stringify(value);</code></pre>
       <div class="implementation-actions"><a class="button primary" href="https://github.com/nohainc/nanomarkup.java/releases/tag/v1.0.0">View release</a><a class="button" href="https://github.com/nohainc/nanomarkup.java">Source and API</a><a class="text-link" href="https://github.com/nohainc/nanomarkup.java/releases/tag/v1.0.0">Release v1.0.0 →</a></div>
     </article>
+
+    <article class="implementation-card" id="dotnet">
+      <header class="implementation-card-header"><div><p class="eyebrow">C# / .NET</p><h2>Nano Markup for .NET</h2></div><span class="status-badge">Stable 1.0.0</span></header>
+      <p>A zero-dependency decoder and writer using idiomatic C# <code>string</code>, <code>Dictionary</code>, and <code>List</code> values.</p>
+      <dl class="implementation-meta"><div><dt>Requires</dt><dd>.NET 8+</dd></div><div><dt>Profiles</dt><dd>Decoder and writer</dd></div><div><dt>Spec</dt><dd>Nano Markup 1.0.0</dd></div></dl>
+      <div class="install-block" aria-label="Install Nano Markup for .NET"><span>Install</span><code>dotnet add package NanoMarkup</code></div>
+      <pre class="usage-example"><code>var value = NanoMarkupCodec.Decode("..\n    name Ariana");
+var source = NanoMarkupCodec.Encode(value);</code></pre>
+      <div class="implementation-actions"><a class="button primary" href="https://github.com/nohainc/nanomarkup.dotnet/releases/tag/v1.0.0">View release</a><a class="button" href="https://github.com/nohainc/nanomarkup.dotnet">Source and API</a><a class="text-link" href="https://github.com/nohainc/nanomarkup.dotnet/releases/tag/v1.0.0">Release v1.0.0 →</a></div>
+    </article>
   </div>
 </section>
 
@@ -155,7 +165,7 @@ var source = NanoMarkup.stringify(value);</code></pre>
     <h2 id="conformance-heading">One language, matching data trees</h2>
   </div>
   <div class="conformance-copy">
-    <p>Python, Go, JavaScript/TypeScript, Dart, and Java pass the complete 112-case shared conformance corpus for decoding and writing. All five codebases cross-read one another's output, including LF and CRLF documents.</p>
+    <p>Python, Go, JavaScript/TypeScript, Dart, Java, and .NET pass the complete 112-case shared conformance corpus for decoding and writing. All six codebases cross-read one another's output, including LF and CRLF documents.</p>
     <p>The implementations are practical tools, not normative definitions of Nano Markup. The <a href="{{ '/specification.html' | relative_url }}">1.0.0 specification</a> remains the authority for syntax, data-model, and error behavior.</p>
   </div>
 </section>

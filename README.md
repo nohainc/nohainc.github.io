@@ -123,6 +123,11 @@ permalink: /
       <small>Stable 1.0.0 · Java 17+</small>
       <span>Decode and encode using standard Java collections and strings.</span>
     </a>
+    <a href="https://github.com/nohainc/nanomarkup.dotnet">
+      <strong>C# / .NET implementation</strong>
+      <small>Stable 1.0.0 · .NET 8+</small>
+      <span>Decode and encode using idiomatic C# collections and strings.</span>
+    </a>
   </div>
   <p class="implementation-link"><a href="{{ '/implementations.html' | relative_url }}">Compare and install implementations →</a></p>
 </section>
