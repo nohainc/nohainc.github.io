@@ -29,6 +29,8 @@ EXPECTED_IMPLEMENTATION_LINKS = {
     "https://github.com/nohainc/nanomarkup.java/releases/tag/v1.0.0",
     "https://github.com/nohainc/nanomarkup.dotnet",
     "https://github.com/nohainc/nanomarkup.dotnet/releases/tag/v1.0.0",
+    "https://github.com/nohainc/nanomarkup.c",
+    "https://github.com/nohainc/nanomarkup.c/releases/tag/v1.0.0",
 }
 EXPECTED_SITE_PAGES = (
     "index.html",
@@ -222,6 +224,7 @@ def main() -> int:
             "Dart 3.12+",
             "Java 17+",
             ".NET 8+",
+            "C11 / C++17+",
             "npm install nanomarkup",
             "dart pub add nanomarkup",
             "Stable 1.0.0",

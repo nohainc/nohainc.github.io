@@ -148,6 +148,11 @@ permalink: /
       <small>Stable 1.0.0 · .NET 8+</small>
       <span>Decode and encode using idiomatic C# collections and strings.</span>
     </a>
+    <a href="https://github.com/nohainc/nanomarkup.c">
+      <strong>C and C++ implementation</strong>
+      <small>Stable 1.0.0 · C11 · C++17 · CMake</small>
+      <span>Decode and encode with a portable C API and C++ wrapper.</span>
+    </a>
   </div>
   <p class="implementation-link"><a href="{{ '/implementations.html' | relative_url }}">Compare and install implementations →</a></p>
 </section>
