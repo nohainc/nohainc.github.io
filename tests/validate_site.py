@@ -10,7 +10,7 @@ EXPECTED_VERSION = "1.0.0"
 EXPECTED_BASE_URL = "https://nohainc.github.io"
 EXPECTED_BASE_PATH = "/"
 EXPECTED_IMPLEMENTATIONS_DESCRIPTION = (
-    "Compare Nano Markup 1.0.0 for Python, Go, JavaScript, TypeScript, and Dart."
+    "Compare Nano Markup 1.0.0 for Python, Go, JavaScript, TypeScript, Dart, and Java."
 )
 EXPECTED_IMPLEMENTATION_LINKS = {
     "https://pypi.org/project/nanomarkup/",
@@ -25,6 +25,8 @@ EXPECTED_IMPLEMENTATION_LINKS = {
     "https://pub.dev/packages/nanomarkup",
     "https://github.com/nohainc/nanomarkup.dart",
     "https://github.com/nohainc/nanomarkup.dart/releases/tag/v1.0.0",
+    "https://github.com/nohainc/nanomarkup.java",
+    "https://github.com/nohainc/nanomarkup.java/releases/tag/v1.0.0",
 }
 FORBIDDEN_LEGACY_TEXT = (
     "nanomarkup.github.com",
@@ -197,6 +199,7 @@ def main() -> int:
             "Go 1.24+",
             "Node.js 22+",
             "Dart 3.12+",
+            "Java 17+",
             "npm install nanomarkup",
             "dart pub add nanomarkup",
             "Stable 1.0.0",

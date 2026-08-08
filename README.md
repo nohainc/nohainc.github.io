@@ -118,6 +118,11 @@ permalink: /
       <small>Stable 1.0.0 · Dart 3.12+ · Web · Flutter</small>
       <span>Decode and encode using native Dart values across every Dart platform.</span>
     </a>
+    <a href="https://github.com/nohainc/nanomarkup.java">
+      <strong>Java implementation</strong>
+      <small>Stable 1.0.0 · Java 17+</small>
+      <span>Decode and encode using standard Java collections and strings.</span>
+    </a>
   </div>
   <p class="implementation-link"><a href="{{ '/implementations.html' | relative_url }}">Compare and install implementations →</a></p>
 </section>
