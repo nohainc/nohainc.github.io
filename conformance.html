@@ -1,0 +1,45 @@
+---
+layout: default
+title: Nano Markup Conformance
+description: Nano Markup conformance testing, shared fixtures, byte integrity checks, and stable cross-language parser behavior.
+permalink: /conformance.html
+---
+
+<section class="hero doc-hero">
+  <p class="eyebrow">Conformance</p>
+  <h1>One corpus, matching behavior.</h1>
+  <p class="lede">Nano Markup implementations are tested against a shared conformance corpus so Python, Go, JavaScript, TypeScript, Dart, and Java agree on valid documents, invalid documents, and writer output.</p>
+</section>
+
+<section class="doc-section" aria-labelledby="conformance-scope-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Coverage</p>
+    <h2 id="conformance-scope-heading">What conformance checks</h2>
+  </div>
+  <div class="card-grid">
+    <article>
+      <span class="symbol">in</span>
+      <h3>Valid inputs</h3>
+      <p>Fixtures cover strings, mappings, sequences, nesting, comments, whitespace, Unicode, line endings, and empty values.</p>
+    </article>
+    <article>
+      <span class="symbol">err</span>
+      <h3>Invalid inputs</h3>
+      <p>Error fixtures cover malformed indentation, forbidden characters, duplicate keys, invalid escapes, and syntax mistakes.</p>
+    </article>
+    <article>
+      <span class="symbol">out</span>
+      <h3>Writer output</h3>
+      <p>Writer fixtures verify stable encoded output and cross-read behavior across implementations.</p>
+    </article>
+  </div>
+</section>
+
+<section class="release-callout" aria-labelledby="conformance-links-heading">
+  <div>
+    <p class="eyebrow">Source of truth</p>
+    <h2 id="conformance-links-heading">Use the shared test suite</h2>
+    <p>The specification repository contains the conformance fixtures, validation tools, and coverage notes used by the stable implementations.</p>
+  </div>
+  <a class="button" href="https://github.com/nohainc/nanomarkup.spec/tree/v1.0.0/tests">Open conformance tests</a>
+</section>

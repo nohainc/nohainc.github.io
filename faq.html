@@ -1,0 +1,64 @@
+---
+layout: default
+title: Nano Markup FAQ
+description: Frequently asked questions about Nano Markup, YAML alternatives, JSON comparisons, configuration files, data types, comments, and implementations.
+permalink: /faq.html
+---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What is Nano Markup?", "acceptedAnswer": {"@type": "Answer", "text": "Nano Markup is a minimal indentation-based data format for strings, mappings, and sequences."}},
+    {"@type": "Question", "name": "Is Nano Markup a YAML alternative?", "acceptedAnswer": {"@type": "Answer", "text": "Nano Markup can be used as a smaller alternative for simple readable data files, but YAML remains broader and has more established tooling."}},
+    {"@type": "Question", "name": "Does Nano Markup infer numbers or booleans?", "acceptedAnswer": {"@type": "Answer", "text": "No. Nano Markup scalar values are strings. Applications decide how to interpret those strings."}},
+    {"@type": "Question", "name": "What languages support Nano Markup?", "acceptedAnswer": {"@type": "Answer", "text": "Stable Nano Markup implementations exist for Python, Go, JavaScript, TypeScript, Dart, and Java."}}
+  ]
+}
+</script>
+
+<section class="hero doc-hero">
+  <p class="eyebrow">FAQ</p>
+  <h1>Questions about Nano Markup.</h1>
+  <p class="lede">Short answers for people comparing Nano Markup with JSON, YAML, TOML, and other readable data formats.</p>
+</section>
+
+<section class="faq-list" aria-labelledby="faq-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Answers</p>
+    <h2 id="faq-heading">The practical details</h2>
+  </div>
+  <article>
+    <h3>What is Nano Markup?</h3>
+    <p>Nano Markup is a minimal indentation-based data format. It represents exactly three value types: strings, mappings, and sequences.</p>
+  </article>
+  <article>
+    <h3>Is Nano Markup a YAML alternative?</h3>
+    <p>It can be, when you need a smaller readable data format and do not need YAML features such as anchors, tags, merges, or scalar type inference.</p>
+  </article>
+  <article>
+    <h3>How is Nano Markup different from JSON?</h3>
+    <p>Nano Markup is easier to write as plain text because it avoids braces, commas, and most quoting. JSON is better for universal machine interchange and APIs.</p>
+  </article>
+  <article>
+    <h3>How is Nano Markup different from TOML?</h3>
+    <p>TOML includes typed scalar values and table syntax. Nano Markup keeps a smaller tree model and leaves typed interpretation to applications.</p>
+  </article>
+  <article>
+    <h3>Does Nano Markup support comments?</h3>
+    <p>Yes. Comments are part of the language syntax and are ignored when decoding the data tree.</p>
+  </article>
+  <article>
+    <h3>Does Nano Markup infer numbers, booleans, null, or dates?</h3>
+    <p>No. Scalar values are strings. This avoids surprising type conversions and keeps implementations consistent.</p>
+  </article>
+  <article>
+    <h3>What languages support Nano Markup?</h3>
+    <p>Stable implementations are available for Python, Go, JavaScript, TypeScript, Dart, and Java.</p>
+  </article>
+  <article>
+    <h3>Is Nano Markup stable?</h3>
+    <p>Yes. Nano Markup 1.0.0 is the first stable language specification. Stable releases are immutable, with known issues recorded as errata.</p>
+  </article>
+</section>

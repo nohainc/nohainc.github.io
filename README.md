@@ -44,7 +44,7 @@ permalink: /
 }</code></pre>
     </figure>
   </div>
-  <p class="example-link"><a href="https://github.com/nohainc/nanomarkup.spec/tree/v1.0.0/examples">Browse more paired Nano and JSON examples →</a></p>
+  <p class="example-link"><a href="{{ '/examples.html' | relative_url }}">Browse practical Nano Markup examples →</a></p>
 </section>
 
 <section class="model" aria-labelledby="model-heading">
@@ -94,9 +94,29 @@ permalink: /
     <h2 id="ecosystem-heading">Specification and implementations</h2>
   </div>
   <div class="link-grid">
+    <a href="{{ '/why-nano-markup.html' | relative_url }}">
+      <strong>Why Nano Markup</strong>
+      <small>Readable data format</small>
+      <span>Learn where the language fits and why its data model stays small.</span>
+    </a>
+    <a href="{{ '/tutorial.html' | relative_url }}">
+      <strong>Nano Markup tutorial</strong>
+      <small>Strings · mappings · sequences</small>
+      <span>Start with the basics: indentation, text blocks, comments, and empty values.</span>
+    </a>
     <a href="https://github.com/nohainc/nanomarkup.spec/tree/v1.0.0">
       <strong>Language specification</strong>
       <span>Normative grammar, conformance fixtures, examples, and release history.</span>
+    </a>
+    <a href="{{ '/specification-design.html' | relative_url }}">
+      <strong>Specification design</strong>
+      <small>Rationale</small>
+      <span>See why the language keeps exactly three value types and fixed indentation.</span>
+    </a>
+    <a href="{{ '/conformance.html' | relative_url }}">
+      <strong>Conformance testing</strong>
+      <small>Shared corpus</small>
+      <span>Understand how stable implementations prove matching parser and writer behavior.</span>
     </a>
     <a href="https://github.com/nohainc/nanomarkup.python">
       <strong>Python implementation</strong>
@@ -130,6 +150,31 @@ permalink: /
     </a>
   </div>
   <p class="implementation-link"><a href="{{ '/implementations.html' | relative_url }}">Compare and install implementations →</a></p>
+</section>
+
+<section class="ecosystem" aria-labelledby="compare-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Compare formats</p>
+    <h2 id="compare-heading">Nano Markup beside familiar choices</h2>
+  </div>
+  <div class="link-grid">
+    <a href="{{ '/nano-markup-vs-yaml.html' | relative_url }}">
+      <strong>Nano Markup vs YAML</strong>
+      <span>Compare indentation, type inference, advanced features, and configuration use cases.</span>
+    </a>
+    <a href="{{ '/nano-markup-vs-json.html' | relative_url }}">
+      <strong>Nano Markup vs JSON</strong>
+      <span>See how Nano Markup trades universal interchange for easier plain-text authoring.</span>
+    </a>
+    <a href="{{ '/nano-markup-vs-toml.html' | relative_url }}">
+      <strong>Nano Markup vs TOML</strong>
+      <span>Compare typed configuration tables with a smaller indentation-based data tree.</span>
+    </a>
+    <a href="{{ '/faq.html' | relative_url }}">
+      <strong>Nano Markup FAQ</strong>
+      <span>Short answers about YAML alternatives, JSON comparisons, comments, stability, and implementations.</span>
+    </a>
+  </div>
 </section>
 
 <section class="release-callout" aria-labelledby="release-heading">

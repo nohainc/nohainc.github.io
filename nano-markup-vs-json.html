@@ -1,0 +1,64 @@
+---
+layout: default
+title: Nano Markup vs JSON
+description: Compare Nano Markup and JSON for readable data files, configuration, strings, mappings, sequences, and comments.
+permalink: /nano-markup-vs-json.html
+---
+
+<section class="hero doc-hero">
+  <p class="eyebrow">Comparison</p>
+  <h1>Nano Markup vs JSON.</h1>
+  <p class="lede">JSON is the universal interchange format. Nano Markup is a plain-text authoring format for the same broad shapes: strings, mappings, and sequences, with less punctuation and support for comments.</p>
+</section>
+
+<section class="doc-section" aria-labelledby="json-table-heading">
+  <div class="section-heading">
+    <p class="eyebrow">At a glance</p>
+    <h2 id="json-table-heading">Punctuation-light authoring, JSON-friendly data</h2>
+  </div>
+  <div class="comparison-table" role="table" aria-label="Nano Markup and JSON comparison">
+    <div role="row"><strong role="cell">Human editing</strong><span role="cell">Nano Markup removes braces, commas, most quotes, and escape-heavy multiline text. JSON is stricter and more punctuation-heavy.</span></div>
+    <div role="row"><strong role="cell">Interchange</strong><span role="cell">JSON is ideal for APIs and protocols. Nano Markup is best as a source file that applications decode into their own values.</span></div>
+    <div role="row"><strong role="cell">Comments</strong><span role="cell">Nano Markup supports comments. Standard JSON does not.</span></div>
+    <div role="row"><strong role="cell">Scalar types</strong><span role="cell">Nano Markup scalars are strings. JSON has strings, numbers, booleans, and null.</span></div>
+  </div>
+</section>
+
+<section class="doc-section" aria-labelledby="json-example-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Example</p>
+    <h2 id="json-example-heading">A catalog entry in both formats</h2>
+  </div>
+  <div class="code-grid">
+    <figure>
+      <figcaption>Nano Markup</figcaption>
+      <pre><code>..
+    id shirt-001
+    title Linen shirt
+    tags:
+        summer
+        linen
+    description|
+        Lightweight shirt for warm weather.
+        Machine washable.</code></pre>
+    </figure>
+    <figure>
+      <figcaption>JSON</figcaption>
+      <pre><code>{
+  "id": "shirt-001",
+  "title": "Linen shirt",
+  "tags": ["summer", "linen"],
+  "description": "Lightweight shirt for warm weather.\nMachine washable."
+}</code></pre>
+    </figure>
+  </div>
+</section>
+
+<section class="release-callout" aria-labelledby="json-next-heading">
+  <div>
+    <p class="eyebrow">Practical path</p>
+    <h2 id="json-next-heading">Author in Nano Markup, exchange as JSON</h2>
+    <p>The example repository includes paired Nano Markup and JSON files so implementers can compare parsed data trees and verify behavior.</p>
+  </div>
+  <a class="button" href="{{ '/examples.html' | relative_url }}">Browse examples</a>
+</section>

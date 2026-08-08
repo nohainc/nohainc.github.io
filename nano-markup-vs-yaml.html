@@ -1,0 +1,78 @@
+---
+layout: default
+title: Nano Markup vs YAML
+description: Compare Nano Markup and YAML for readable configuration files, data documents, indentation, type inference, and parser complexity.
+permalink: /nano-markup-vs-yaml.html
+---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Nano Markup vs YAML",
+  "description": "A practical comparison of Nano Markup and YAML.",
+  "url": "https://nohainc.github.io/nano-markup-vs-yaml.html",
+  "about": ["YAML alternative", "configuration files", "data serialization"]
+}
+</script>
+
+<section class="hero doc-hero">
+  <p class="eyebrow">Comparison</p>
+  <h1>Nano Markup vs YAML.</h1>
+  <p class="lede">Nano Markup is a smaller, stricter indentation-based data format. YAML is broader and more expressive. The right choice depends on whether you want a compact data tree or a feature-rich configuration language.</p>
+</section>
+
+<section class="doc-section" aria-labelledby="yaml-table-heading">
+  <div class="section-heading">
+    <p class="eyebrow">At a glance</p>
+    <h2 id="yaml-table-heading">Different goals, different tradeoffs</h2>
+  </div>
+  <div class="comparison-table" role="table" aria-label="Nano Markup and YAML comparison">
+    <div role="row"><strong role="cell">Data model</strong><span role="cell">Nano Markup has strings, mappings, and sequences. YAML has many scalar types and tags.</span></div>
+    <div role="row"><strong role="cell">Type inference</strong><span role="cell">Nano Markup never guesses values. Applications interpret strings. YAML can infer booleans, numbers, nulls, dates, and more.</span></div>
+    <div role="row"><strong role="cell">Indentation</strong><span role="cell">Nano Markup uses exactly four spaces per level. YAML allows more flexible indentation.</span></div>
+    <div role="row"><strong role="cell">Advanced features</strong><span role="cell">Nano Markup omits anchors, aliases, custom tags, merges, and references. YAML includes them.</span></div>
+    <div role="row"><strong role="cell">Best fit</strong><span role="cell">Nano Markup fits simple readable data. YAML fits established tooling and complex configuration.</span></div>
+  </div>
+</section>
+
+<section class="doc-section" aria-labelledby="yaml-example-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Same document</p>
+    <h2 id="yaml-example-heading">A profile in both formats</h2>
+  </div>
+  <div class="code-grid">
+    <figure>
+      <figcaption>Nano Markup</figcaption>
+      <pre><code>..
+    name Ariana
+    languages:
+        Slovak
+        English
+    address|
+        20 Forest Street
+        811 01 Bratislava</code></pre>
+    </figure>
+    <figure>
+      <figcaption>YAML</figcaption>
+      <pre><code>name: Ariana
+languages:
+  - Slovak
+  - English
+address: |-
+  20 Forest Street
+  811 01 Bratislava</code></pre>
+    </figure>
+  </div>
+</section>
+
+<section class="doc-section" aria-labelledby="yaml-choice-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Choosing</p>
+    <h2 id="yaml-choice-heading">When to choose each format</h2>
+  </div>
+  <div class="doc-copy">
+    <p>Choose Nano Markup when the document should stay close to a plain data tree, when every scalar can safely remain a string, and when parser behavior should be easy to test across languages.</p>
+    <p>Choose YAML when your project already depends on YAML tooling, needs established ecosystem support, or benefits from YAML-specific features such as anchors, tags, and richer scalar interpretation.</p>
+  </div>
+</section>

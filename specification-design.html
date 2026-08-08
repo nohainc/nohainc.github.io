@@ -1,0 +1,47 @@
+---
+layout: default
+title: Nano Markup Specification Design
+description: Design rationale for Nano Markup 1.0.0, including the small data model, exact indentation, strings-only scalars, and conformance testing.
+permalink: /specification-design.html
+---
+
+<section class="hero doc-hero">
+  <p class="eyebrow">Design rationale</p>
+  <h1>The specification is small on purpose.</h1>
+  <p class="lede">Nano Markup 1.0.0 favors a narrow, testable language over a broad feature set. The result is a data format that can be implemented consistently across languages.</p>
+</section>
+
+<section class="doc-section" aria-labelledby="design-rules-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Rationale</p>
+    <h2 id="design-rules-heading">The constraints do real work</h2>
+  </div>
+  <div class="card-grid">
+    <article>
+      <span class="symbol">3</span>
+      <h3>Three value types</h3>
+      <p>Strings, mappings, and sequences cover the core document tree without introducing type inference differences between languages.</p>
+    </article>
+    <article>
+      <span class="symbol">4</span>
+      <h3>Four-space indentation</h3>
+      <p>Fixed indentation removes a large class of ambiguous formatting and parser edge cases.</p>
+    </article>
+    <article>
+      <span class="symbol">ok</span>
+      <h3>Conformance first</h3>
+      <p>The shared corpus makes independent implementations prove they decode and write the same data trees.</p>
+    </article>
+  </div>
+</section>
+
+<section class="doc-section" aria-labelledby="design-omissions-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Omissions</p>
+    <h2 id="design-omissions-heading">Features left out intentionally</h2>
+  </div>
+  <div class="doc-copy">
+    <p>Nano Markup does not define schemas, references, anchors, aliases, custom tags, canonical serialization, or application-level typing. Those features can be valuable, but including them would make the core language larger and harder to implement consistently.</p>
+    <p>The language specifies syntax and the parsed data model. Applications can layer validation, typed interpretation, and domain rules above that model.</p>
+  </div>
+</section>

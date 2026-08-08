@@ -1,0 +1,56 @@
+---
+layout: default
+title: Nano Markup Tutorial
+description: "Learn Nano Markup basics: strings, mappings, sequences, indentation, multiline text, comments, and empty values."
+permalink: /tutorial.html
+---
+
+<section class="hero doc-hero">
+  <p class="eyebrow">Tutorial</p>
+  <h1>Learn Nano Markup.</h1>
+  <p class="lede">Nano Markup has three value types and a small set of syntax rules. This tutorial shows the practical basics for writing and reading a <code>.nano</code> file.</p>
+</section>
+
+<section class="doc-section" aria-labelledby="tutorial-basics-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Basics</p>
+    <h2 id="tutorial-basics-heading">Start with mappings and sequences</h2>
+  </div>
+  <div class="doc-copy">
+    <p>A document can be a string, a mapping, or a sequence. A root mapping begins with <code>..</code>. A root sequence begins with <code>:</code>. Nested values use exactly four spaces per level.</p>
+    <pre><code>..
+    title Project notes
+    tags:
+        release
+        documentation
+    owner..
+        name Ariana
+        team Tools</code></pre>
+  </div>
+</section>
+
+<section class="doc-section" aria-labelledby="tutorial-text-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Text</p>
+    <h2 id="tutorial-text-heading">Use block strings for multiline text</h2>
+  </div>
+  <div class="doc-copy">
+    <p>Use <code>|</code> when a value spans multiple lines. The block body is indented one level deeper than the key.</p>
+    <pre><code>..
+    summary|
+        Nano Markup is small.
+        It keeps plain text readable.
+    status stable</code></pre>
+  </div>
+</section>
+
+<section class="doc-section" aria-labelledby="tutorial-next-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Next</p>
+    <h2 id="tutorial-next-heading">Read the exact rules when implementing</h2>
+  </div>
+  <div class="doc-copy">
+    <p>The tutorial is a starting point. The stable specification defines the exact grammar, data model, conformance requirements, and error behavior for parser and writer implementations.</p>
+    <p><a href="{{ '/specification.html' | relative_url }}">Open the Nano Markup 1.0.0 specification →</a></p>
+  </div>
+</section>

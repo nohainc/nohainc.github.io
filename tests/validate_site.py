@@ -30,6 +30,23 @@ EXPECTED_IMPLEMENTATION_LINKS = {
     "https://github.com/nohainc/nanomarkup.dotnet",
     "https://github.com/nohainc/nanomarkup.dotnet/releases/tag/v1.0.0",
 }
+EXPECTED_SITE_PAGES = (
+    "index.html",
+    "specification.html",
+    "implementations.html",
+    "examples.html",
+    "tutorial.html",
+    "why-nano-markup.html",
+    "nano-markup-vs-yaml.html",
+    "nano-markup-vs-json.html",
+    "nano-markup-vs-toml.html",
+    "specification-design.html",
+    "conformance.html",
+    "faq.html",
+    "sitemap.xml",
+    "robots.txt",
+    "google34e3fed16101cfdb.html",
+)
 FORBIDDEN_LEGACY_TEXT = (
     "nanomarkup.github.com",
     "one tab",
@@ -135,14 +152,7 @@ def check_page(path: Path, site: Path) -> list[str]:
 
 def main() -> int:
     site = Path(sys.argv[1] if len(sys.argv) > 1 else "_site").resolve()
-    required = (
-        site / "index.html",
-        site / "specification.html",
-        site / "implementations.html",
-        site / "sitemap.xml",
-        site / "robots.txt",
-        site / "google34e3fed16101cfdb.html",
-    )
+    required = tuple(site / page for page in EXPECTED_SITE_PAGES)
     errors = [f"missing generated file: {path}" for path in required if not path.is_file()]
 
     for page in (
@@ -150,6 +160,15 @@ def main() -> int:
         site / "404.html",
         site / "specification.html",
         site / "implementations.html",
+        site / "examples.html",
+        site / "tutorial.html",
+        site / "why-nano-markup.html",
+        site / "nano-markup-vs-yaml.html",
+        site / "nano-markup-vs-json.html",
+        site / "nano-markup-vs-toml.html",
+        site / "specification-design.html",
+        site / "conformance.html",
+        site / "faq.html",
     ):
         if page.is_file():
             errors.extend(check_page(page, site))
@@ -218,8 +237,17 @@ def main() -> int:
         sitemap_text = sitemap.read_text(encoding="utf-8")
         if EXPECTED_BASE_URL not in sitemap_text:
             errors.append("sitemap.xml does not use the canonical site URL")
-        if f"{EXPECTED_BASE_URL}/implementations.html" not in sitemap_text:
-            errors.append("sitemap.xml does not include implementations.html")
+        for page in EXPECTED_SITE_PAGES:
+            if page in {
+                "index.html",
+                "sitemap.xml",
+                "robots.txt",
+                "google34e3fed16101cfdb.html",
+            }:
+                continue
+            expected_url = f"{EXPECTED_BASE_URL}/{page}"
+            if expected_url not in sitemap_text:
+                errors.append(f"sitemap.xml does not include {page}")
 
     if errors:
         print("Website validation failed:")
