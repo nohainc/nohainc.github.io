@@ -151,8 +151,18 @@ def main() -> int:
             errors.extend(check_page(page, site))
 
     index = site / "index.html"
-    if index.is_file() and EXPECTED_VERSION not in index.read_text(encoding="utf-8"):
-        errors.append(f"index.html does not identify Nano Markup {EXPECTED_VERSION}")
+    if index.is_file():
+        index_text = index.read_text(encoding="utf-8")
+        if EXPECTED_VERSION not in index_text:
+            errors.append(f"index.html does not identify Nano Markup {EXPECTED_VERSION}")
+        parser = PageParser()
+        parser.feed(index_text)
+        expected_canonical = f"{EXPECTED_BASE_URL}/"
+        if parser.canonical != [expected_canonical]:
+            errors.append(
+                "index.html: canonical URL must be "
+                f"{expected_canonical!r}, not the duplicate /index.html URL"
+            )
 
     implementations = site / "implementations.html"
     if implementations.is_file():
