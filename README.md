@@ -163,6 +163,11 @@ permalink: /
       <small>Stable 1.0.0 · Swift 6+</small>
       <span>Decode and encode with idiomatic Swift values.</span>
     </a>
+    <a href="https://github.com/nohainc/nanomarkup.powershell">
+      <strong>PowerShell implementation</strong>
+      <small>Stable 1.0.0 · PowerShell 7.2+</small>
+      <span>Decode and encode with idiomatic PowerShell cmdlets.</span>
+    </a>
   </div>
   <p class="implementation-link"><a href="{{ '/implementations.html' | relative_url }}">Compare and install implementations →</a></p>
 </section>
