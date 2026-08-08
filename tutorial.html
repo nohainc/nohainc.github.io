@@ -17,7 +17,7 @@ permalink: /tutorial.html
     <h2 id="tutorial-basics-heading">Start with mappings and sequences</h2>
   </div>
   <div class="doc-copy">
-    <p>A document can be a string, a mapping, or a sequence. A root mapping begins with <code>..</code>. A root sequence begins with <code>:</code>. Nested values use exactly four spaces per level.</p>
+    <p>A document can be a string, a mapping, or a sequence. A simple value stays on the same line as its key, such as <code>title Project notes</code>. A root mapping begins with <code>..</code>, a root sequence begins with <code>:</code>, and nested values use exactly four spaces per level.</p>
     <pre><code>..
     title Project notes
     tags:
@@ -35,7 +35,7 @@ permalink: /tutorial.html
     <h2 id="tutorial-text-heading">Use block strings for multiline text</h2>
   </div>
   <div class="doc-copy">
-    <p>Use <code>|</code> when a value spans multiple lines. The block body is indented one level deeper than the key.</p>
+    <p>Use <code>|</code> when a value spans multiple lines. The following indented lines are joined into one string, preserving the line breaks. The block body is indented one level deeper than the key, while the next value returns to the key's indentation.</p>
     <pre><code>..
     summary|
         Nano Markup is small.
