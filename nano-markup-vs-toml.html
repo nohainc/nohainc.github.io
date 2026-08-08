@@ -24,6 +24,34 @@ permalink: /nano-markup-vs-toml.html
   </div>
 </section>
 
+<section class="doc-section" aria-labelledby="toml-example-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Same data</p>
+    <h2 id="toml-example-heading">A profile in both formats</h2>
+  </div>
+  <div class="code-grid">
+    <figure>
+      <figcaption>Nano Markup</figcaption>
+      <pre><code>..
+    name Ariana
+    active true
+    address..
+        city Bratislava
+        country Slovakia</code></pre>
+    </figure>
+    <figure>
+      <figcaption>TOML</figcaption>
+      <pre><code>name = "Ariana"
+active = true
+
+[address]
+city = "Bratislava"
+country = "Slovakia"</code></pre>
+    </figure>
+  </div>
+  <p>Nano Markup keeps every scalar as text, while TOML interprets <code>true</code> as a boolean and uses a table header for nested data. The right choice depends on whether a small string-based tree or typed configuration is more useful to your application.</p>
+</section>
+
 <section class="doc-section" aria-labelledby="toml-choice-heading">
   <div class="section-heading">
     <p class="eyebrow">Choosing</p>
